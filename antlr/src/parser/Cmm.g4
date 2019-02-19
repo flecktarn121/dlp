@@ -1,6 +1,6 @@
 grammar Cmm;	
 
-program: 
+program:EXPRESSION
        ;
        
 fragment
@@ -46,10 +46,58 @@ REAL_CONSTANT:	INTEGER*'.'DIGIT+
 				|INTEGER+(('.'DIGIT+)?)(EXPONENT?)
 				;				
 				
-SINGLE_COMMENT: '//'.*?('\r'|'\n'|EOF)+
+SINGLE_COMMENT: '//'.*?'\r'?('\n'|EOF)
 				-> skip
 				;
 				
 MULTIPLE_COMMENT: '/*'.*?'*/'
 				-> skip
 				;
+				
+/* GRAMMAR */
+
+EXPRESSION: (REAL_CONSTANT|CHAR_CONSTANT|INT_CONSTANT)
+			|ARIHMETIC_OPERATION
+			|BOOLEAN_OPERATION
+			|BOOLEAN_NEGATION
+			|UNARY_MINUS
+			|ARRAY_ACCESS
+			|FIELD_ACCESS
+			|CAST
+			|ID
+			;
+			
+ARIHMETIC_OPERATION: EXPRESSION('*'|'/')EXPRESSION
+					|EXPRESSION('+'|'-')EXPRESSION
+					|
+					;
+BOOLEAN_OPERATION: EXPRESSION('&&'|'||')EXPRESSION
+					;
+
+BOOLEAN_NEGATION: '!'EXPRESSION
+				;
+				
+UNARY_MINUS: '-'EXPRESSION
+			;
+			
+ARRAY_ACCESS: EXPRESSION'['EXPRESSION']'
+			;
+			
+FIELD_ACCESS: EXPRESSION'.'ID
+			;
+
+INT: 'int'
+	;
+	
+CHAR: 'char'
+	;
+	
+REAL: 'double'
+	;
+
+CAST: (INT|CHAR|REAL)EXPRESSION
+	;
+			
+
+
+

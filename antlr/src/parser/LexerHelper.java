@@ -12,7 +12,8 @@ public class LexerHelper {
 	}
 
 	public static char lexemeToChar(String text) {
-
+		System.out.println(text.charAt(0));
+		System.out.println(text);
 		return text.charAt(0);
 	}
 
