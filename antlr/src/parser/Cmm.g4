@@ -1,6 +1,6 @@
 grammar Cmm;	
 
-program:EXPRESSION
+program:
        ;
        
 fragment
@@ -56,47 +56,44 @@ MULTIPLE_COMMENT: '/*'.*?'*/'
 				
 /* GRAMMAR */
 
-EXPRESSION: (REAL_CONSTANT|CHAR_CONSTANT|INT_CONSTANT)
-			|ARIHMETIC_OPERATION
-			|BOOLEAN_OPERATION
-			|BOOLEAN_NEGATION
-			|UNARY_MINUS
-			|ARRAY_ACCESS
-			|FIELD_ACCESS
-			|CAST
+EXPRESSION: BASIC_EXPRESSION('*'|'/')EXPRESSION //arithmetic operation
+			|BASIC_EXPRESSION('+'|'-')EXPRESSION //arithmetic operation
+			|BASIC_EXPRESSION('&&'|'||')EXPRESSION //boolean operation
+			|'!'EXPRESSION //boolean negation
+			|'-'EXPRESSION //unary minus
+			|BASIC_EXPRESSION'['EXPRESSION']' //array access
+	//		|EXPRESSION'.'ID
+			|(TYPE)EXPRESSION //cast
 			|ID
+			|BASIC_EXPRESSION
 			;
-			
-ARIHMETIC_OPERATION: EXPRESSION('*'|'/')EXPRESSION
-					|EXPRESSION('+'|'-')EXPRESSION
-					|
-					;
-BOOLEAN_OPERATION: EXPRESSION('&&'|'||')EXPRESSION
-					;
 
-BOOLEAN_NEGATION: '!'EXPRESSION
+BASIC_EXPRESSION: (REAL_CONSTANT|CHAR_CONSTANT|INT_CONSTANT)
 				;
-				
-UNARY_MINUS: '-'EXPRESSION
-			;
-			
-ARRAY_ACCESS: EXPRESSION'['EXPRESSION']'
-			;
-			
-FIELD_ACCESS: EXPRESSION'.'ID
+
+TYPE: 'int'
+	  |'char'
+	  |'double'
+	  ;
+	
+STATEMENT: EXPRESSION '=' EXPRESSION
+		   |'while' '(' EXPRESSION ')' BLOCK
+		   |'if' '(' EXPRESSION ')' BLOCK ('else' BLOCK)?
+		   |ID'(' (EXPRESSION)? ')'
+		   |EXPRESSION '=' EXPRESSION';'
+		   |'write' EXPRESSION (','EXPRESSION)*
+		   
+		   
+		;
+		
+BLOCK: STATEMENT
+		| '{' STATEMENT '}'
+		;
+		
+DEFINITION: TYPE ID ((','ID)*)';'
+			|TYPE ID '('(DEFINITION (','DEFINITION))?'){'STATEMENT*'}'
 			;
 
-INT: 'int'
-	;
-	
-CHAR: 'char'
-	;
-	
-REAL: 'double'
-	;
-
-CAST: (INT|CHAR|REAL)EXPRESSION
-	;
 			
 
 
