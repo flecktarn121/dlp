@@ -1,7 +1,49 @@
 grammar Cmm;	
 
-program:
+program: definition*
        ;
+       
+/* SYNTAX RULES */
+
+definition: type ID ((','ID)*)';'
+			|type ID '('(definition (','definition))?'){'statement*'}'
+			;
+
+type: 'int'
+	  |'char'
+	  |'double'
+	  ;
+	
+statement: 'while' '(' expr ')' block
+		   |'if' '(' expr ')' block ('else' block)?
+		   |ID'(' (expr)? ')'  ';'
+		   |expr '=' expr  ';'
+		   |'write' expr (','expr)* ';'
+		   |'read' expr (','expr)* ';'
+		;
+		
+block: statement
+		| '{' statement* '}'
+		;
+		
+expr:ID
+			|REAL_CONSTANT
+			|CHAR_CONSTANT
+			|INT_CONSTANT
+			|expr '[' expr ']' //array access
+			|expr'.'ID
+			|'('type')' expr //cast			
+			| '(' expr ')'
+			|expr ('*'|'/') expr //arithmetic operation
+			|expr ( '+'| '-' ) expr //arithmetic operation
+			|expr ('&&' | '||' ) expr //boolean operation
+			|'!' expr //boolean negation
+			|'-' expr //unary minus
+			;
+			
+
+			
+/***** LEXICAL RULES ***/
        
 fragment
 LETTER: [a-zA-Z]
@@ -53,48 +95,3 @@ SINGLE_COMMENT: '//'.*?'\r'?('\n'|EOF)
 MULTIPLE_COMMENT: '/*'.*?'*/'
 				-> skip
 				;
-				
-/* GRAMMAR */
-
-EXPRESSION: BASIC_EXPRESSION('*'|'/')EXPRESSION //arithmetic operation
-			|BASIC_EXPRESSION('+'|'-')EXPRESSION //arithmetic operation
-			|BASIC_EXPRESSION('&&'|'||')EXPRESSION //boolean operation
-			|'!'EXPRESSION //boolean negation
-			|'-'EXPRESSION //unary minus
-			|BASIC_EXPRESSION'['EXPRESSION']' //array access
-	//		|EXPRESSION'.'ID
-			|(TYPE)EXPRESSION //cast
-			|ID
-			|BASIC_EXPRESSION
-			;
-
-BASIC_EXPRESSION: (REAL_CONSTANT|CHAR_CONSTANT|INT_CONSTANT)
-				;
-
-TYPE: 'int'
-	  |'char'
-	  |'double'
-	  ;
-	
-STATEMENT: EXPRESSION '=' EXPRESSION
-		   |'while' '(' EXPRESSION ')' BLOCK
-		   |'if' '(' EXPRESSION ')' BLOCK ('else' BLOCK)?
-		   |ID'(' (EXPRESSION)? ')'
-		   |EXPRESSION '=' EXPRESSION';'
-		   |'write' EXPRESSION (','EXPRESSION)*
-		   
-		   
-		;
-		
-BLOCK: STATEMENT
-		| '{' STATEMENT '}'
-		;
-		
-DEFINITION: TYPE ID ((','ID)*)';'
-			|TYPE ID '('(DEFINITION (','DEFINITION))?'){'STATEMENT*'}'
-			;
-
-			
-
-
-
