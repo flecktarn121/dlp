@@ -1,12 +1,12 @@
 grammar Cmm;	
 
-program: definition*
+program: definition+
        ;
        
 /* SYNTAX RULES */
 
-definition: type ID ((','ID)*)';'
-			|type ID '('(definition (','definition))?'){'statement*'}'
+definition: type ID (',' ID)* ';'
+			|('void'|type) ID '(' (type ID (',' type ID)*)? ')''{'(statement|definition)*'}'
 			;
 
 type: 'int'
@@ -20,6 +20,7 @@ statement: 'while' '(' expr ')' block
 		   |expr '=' expr  ';'
 		   |'write' expr (','expr)* ';'
 		   |'read' expr (','expr)* ';'
+		   |'return' expr ';'
 		;
 		
 block: statement
@@ -34,11 +35,13 @@ expr:ID
 			|expr'.'ID
 			|'('type')' expr //cast			
 			| '(' expr ')'
-			|expr ('*'|'/') expr //arithmetic operation
+			|expr ('*'|'/'|'%') expr //arithmetic operation
 			|expr ( '+'| '-' ) expr //arithmetic operation
+			|expr ('<'|'>'|'>='|'<=') expr //
 			|expr ('&&' | '||' ) expr //boolean operation
 			|'!' expr //boolean negation
 			|'-' expr //unary minus
+			|ID
 			;
 			
 
@@ -74,13 +77,14 @@ INTEGER:	[1-9]DIGIT*|'0'
 WHITESPACES:	('\r'|'\n'|'\t'|' ')+ -> skip
 				;
 
-ID: (LETTER|'_')|(LETTER|'_'|DIGIT)+
+ID: (LETTER|'_')(LETTER|'_'|DIGIT)*
 	;
   		 
 INT_CONSTANT: INTEGER
             ;
             
-CHAR_CONSTANT: '\''(LETTER|SYMBOLS|ASCII_RANGE|SPECIAL_CHARS)+ '\''
+CHAR_CONSTANT: '\''(.|ASCII_RANGE|SPECIAL_CHARS) '\''
+
 				;
 				
 REAL_CONSTANT:	INTEGER*'.'DIGIT+
