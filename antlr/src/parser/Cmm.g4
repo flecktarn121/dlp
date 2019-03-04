@@ -7,11 +7,13 @@ program: definition+
 
 definition: type ID (',' ID)* ';'
 			|('void'|type) ID '(' (type ID (',' type ID)*)? ')''{'(statement|definition)*'}'
+			|'struct''{' (type ID ';')+ '}'ID ';'
 			;
 
 type: 'int'
 	  |'char'
 	  |'double'
+	  |type('['expr']')+
 	  ;
 	
 statement: 'while' '(' expr ')' block
@@ -21,23 +23,25 @@ statement: 'while' '(' expr ')' block
 		   |'write' expr (','expr)* ';'
 		   |'read' expr (','expr)* ';'
 		   |'return' expr ';'
+		   |ID '('(expr (',' expr)*)? ')'';'
 		;
 		
 block: statement
 		| '{' statement* '}'
 		;
 		
-expr:ID
+expr:		ID
 			|REAL_CONSTANT
 			|CHAR_CONSTANT
 			|INT_CONSTANT
 			|expr '[' expr ']' //array access
+			|ID '('(expr (',' expr)*)? ')'
 			|expr'.'ID
 			|'('type')' expr //cast			
 			| '(' expr ')'
 			|expr ('*'|'/'|'%') expr //arithmetic operation
 			|expr ( '+'| '-' ) expr //arithmetic operation
-			|expr ('<'|'>'|'>='|'<=') expr //
+			|expr ('<'|'>'|'>='|'<='|'==') expr //
 			|expr ('&&' | '||' ) expr //boolean operation
 			|'!' expr //boolean negation
 			|'-' expr //unary minus
