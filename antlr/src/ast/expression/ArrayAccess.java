@@ -7,6 +7,9 @@ public class ArrayAccess implements Expression, AstNode {
 	private int line;
 	private int column;
 
+	public ArrayAccess(Expression position) {
+		this.position = position;
+	}
 	public Expression getPosition() {
 		return position;
 	}

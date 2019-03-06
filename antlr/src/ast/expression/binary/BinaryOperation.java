@@ -10,6 +10,12 @@ public class BinaryOperation implements AstNode, Expression {
 	private Expression left;
 	private Expression right;
 
+	public BinaryOperation(String operation, Expression left, Expression right) {
+		this.operation = operation;
+		this.left = left;
+		this.right = right;
+	}
+
 	@Override
 	public int getLine() {
 

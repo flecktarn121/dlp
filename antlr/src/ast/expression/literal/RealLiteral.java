@@ -8,6 +8,10 @@ public class RealLiteral implements Expression, AstNode {
 	private int line;
 	private int column;
 
+	public RealLiteral(double value) {
+		this.value = value;
+		Double.par
+	}
 	public double getValue() {
 		return value;
 	}

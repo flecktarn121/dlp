@@ -1,5 +1,8 @@
 grammar Cmm;	
-
+@header{
+	import ast.*
+	import java.util.*;
+}
 program: definition+
        ;
        
@@ -30,17 +33,21 @@ block: statement
 		| '{' statement* '}'
 		;
 		
-expr:		ID
-			|REAL_CONSTANT
+expr returns [Expression ast]:
+			ID { $ast = new Variable($ID.text); }
+			|REAL_CONSTANT { $ast = new RealLiteral(Double.parseDouble($REAL_CONSTANT.text)); }
 			|CHAR_CONSTANT
-			|INT_CONSTANT
-			|expr '[' expr ']' //array access
-			|ID '('(expr (',' expr)*)? ')'
-			|expr'.'ID
-			|'('type')' expr //cast			
-			| '(' expr ')'
-			|expr ('*'|'/'|'%') expr //arithmetic operation
-			|expr ( '+'| '-' ) expr //arithmetic operation
+			|INT_CONSTANT { $ast = new RealLiteral(Integer.parseInt($INT_CONSTANT.text)); }
+			|e1=expr '[' e2=expr ']' //array access { $ast = new ArrayAccess($e2.ast)); }
+			|ID '('{ List<Expression> params = new ArrayList<Expression>(); }(e1=expr {$params.add($e1.ast); } (',' e2=expr {$params.add($e1.ast); })*)? ')' 
+				{ $ast = new ArrayAccess($e2)); }//function acess
+			|expr'.'ID { $ast = new FieldAccess($ID.text); }
+			|'('type')' expr {$ast = new Cast($type.ast, $expr.ast); } //cast			
+			| '(' expr ')' {$ast = expr.ast;}
+			|{ String operand = ""; } e1=expr ('*' { $operand = "*"; } |'/' { $operand = "/"; }|'%' { $operand = "%"; }) e2=expr 
+				{ $ast = new BinaryOperation($operation, $e1.ast, $e2.ast); }//arithmetic operation
+			|{ String operand = ""; }expr ( '+' { $operand = "+"; } | '-' { $operand = "-"; } ) expr 
+				{ $ast = new BinaryOperation($operation, $e1.ast, $e2.ast); } //arithmetic operation
 			|expr ('<'|'>'|'>='|'<='|'==') expr //
 			|expr ('&&' | '||' ) expr //boolean operation
 			|'!' expr //boolean negation

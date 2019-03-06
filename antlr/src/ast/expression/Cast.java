@@ -3,11 +3,16 @@ package ast.expression;
 import ast.AstNode;
 import ast.type.Type;
 
-public class Cast implements Expression, AstNode{
+public class Cast implements Expression, AstNode {
 	private Type type;
 	private Expression operand;
 	private int line;
 	private int column;
+
+	public Cast(Type type, Expression expr) {
+		this.type = type;
+		this.operand = expr;
+	}
 
 	public Type getType() {
 		return type;
@@ -24,7 +29,7 @@ public class Cast implements Expression, AstNode{
 	public void setOperand(Expression operand) {
 		this.operand = operand;
 	}
-	
+
 	@Override
 	public int getLine() {
 

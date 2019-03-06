@@ -6,7 +6,10 @@ public class FieldAccess implements Expression, AstNode {
 	private int column;
 	private int line;
 	private String fieldName;
-
+	
+	public FieldAccess(String fieldName) {
+		
+	}
 	public String getFieldName() {
 		return fieldName;
 	}

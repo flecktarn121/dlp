@@ -7,6 +7,9 @@ public class Variable implements Expression, AstNode {
 	private int line;
 	private int column;
 
+	public Variable(String name) {
+		this.name = name;
+	}
 	@Override
 	public int getLine() {
 
