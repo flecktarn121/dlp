@@ -1,18 +1,19 @@
-package ast.type;
+package ast.definition;
 
 import java.util.List;
 
 import ast.AstNode;
-import ast.expression.RecordType;
+import ast.type.RecordType;
+import ast.type.Type;
 
-public class StructType implements AstNode, Type {
+public class StructDef implements AstNode, Definition {
 
 	private int line;
 	private int column;
 	private List<RecordType> fields;
 	private String name;
 
-	public StructType(List<RecordType> fields, String name) {
+	public StructDef(List<RecordType> fields, String name) {
 		super();
 		this.fields = fields;
 		this.name = name;
@@ -27,6 +28,18 @@ public class StructType implements AstNode, Type {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String getName() {
+		
+		return name;
+	}
+
+	@Override
+	public Type getType() {
+		
+		return null;
 	}
 
 }

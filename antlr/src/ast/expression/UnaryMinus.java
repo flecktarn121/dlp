@@ -1,7 +1,6 @@
-package ast.expression.literal;
+package ast.expression;
 
 import ast.AstNode;
-import ast.expression.Expression;
 
 public class UnaryMinus implements AstNode, Expression {
 

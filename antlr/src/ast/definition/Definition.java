@@ -1,5 +1,6 @@
 package ast.definition;
 
+import ast.Body;
 import ast.type.Type;
 
 /**
@@ -8,7 +9,7 @@ import ast.type.Type;
  * @author UO258654
  *
  */
-public interface Definition {
+public interface Definition extends Body {
 	public String getName();
 
 	public Type getType();

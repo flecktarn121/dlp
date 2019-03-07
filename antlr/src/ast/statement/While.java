@@ -3,6 +3,7 @@ package ast.statement;
 import java.util.List;
 
 import ast.AstNode;
+import ast.Body;
 import ast.expression.Expression;
 
 public class While implements AstNode, Statement {
@@ -10,9 +11,9 @@ public class While implements AstNode, Statement {
 	private int line;
 	private int column;
 	private Expression condition;
-	private List<Statement> body;
+	private List<Body> body;
 
-	public While(Expression condition, List<Statement> body) {
+	public While(Expression condition, List<Body> body) {
 		this.condition = condition;
 		this.body = body;
 	}
@@ -25,11 +26,11 @@ public class While implements AstNode, Statement {
 		this.condition = condition;
 	}
 
-	public List<Statement> getBody() {
+	public List<Body> getBody() {
 		return body;
 	}
 
-	public void setBody(List<Statement> body) {
+	public void setBody(List<Body> body) {
 		this.body = body;
 	}
 

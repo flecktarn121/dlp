@@ -41,7 +41,7 @@ SINGLE_COMMENT=40
 MULTIPLE_COMMENT=41
 ','=1
 ';'=2
-'void'=3
+'void {type = new BaseType("void");}'=3
 '('=4
 ')'=5
 '{'=6

@@ -1,7 +1,6 @@
-package ast.expression;
+package ast.type;
 
 import ast.AstNode;
-import ast.type.Type;
 
 public class RecordType implements AstNode, Type {
 

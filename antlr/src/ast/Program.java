@@ -16,7 +16,9 @@ public class Program implements AstNode {
 	private int line;
 	private int column;
 	private List<Definition> definitions;
-
+public Program(List<Definition> definitions) {
+	this.definitions = definitions;
+}
 	@Override
 	public int getLine() {
 		return line;

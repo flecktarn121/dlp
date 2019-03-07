@@ -3,6 +3,7 @@ package ast.statement;
 import java.util.List;
 
 import ast.AstNode;
+import ast.Body;
 import ast.expression.Expression;
 
 public class If implements AstNode, Statement {
@@ -10,10 +11,10 @@ public class If implements AstNode, Statement {
 	private int line;
 	private int column;
 	private Expression condition;
-	private List<Statement> thenBody;
-	private List<Statement> elseBody;
+	private List<Body> thenBody;
+	private List<Body> elseBody;
 
-	public If(Expression condition, List<Statement> thenBody, List<Statement> elseBody) {
+	public If(Expression condition, List<Body> thenBody, List<Body> elseBody) {
 		this.condition = condition;
 		this.thenBody = thenBody;
 		this.elseBody = elseBody;
@@ -27,19 +28,19 @@ public class If implements AstNode, Statement {
 		this.condition = condition;
 	}
 
-	public List<Statement> getThenBody() {
+	public List<Body> getThenBody() {
 		return thenBody;
 	}
 
-	public void setThenBody(List<Statement> thenBody) {
+	public void setThenBody(List<Body> thenBody) {
 		this.thenBody = thenBody;
 	}
 
-	public List<Statement> getElseBody() {
+	public List<Body> getElseBody() {
 		return elseBody;
 	}
 
-	public void setElseBody(List<Statement> elseBody) {
+	public void setElseBody(List<Body> elseBody) {
 		this.elseBody = elseBody;
 	}
 

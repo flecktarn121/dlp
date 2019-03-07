@@ -8,6 +8,10 @@ public class IntegerLiteral implements Expression, AstNode {
 	private int line;
 	private int column;
 
+	public IntegerLiteral(int value) {
+		this.value = value;
+	}
+
 	public int getValue() {
 		return value;
 	}
