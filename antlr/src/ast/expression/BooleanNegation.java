@@ -2,10 +2,14 @@ package ast.expression;
 
 import ast.AstNode;
 
-public class BoolenNegation implements Expression, AstNode {
+public class BooleanNegation implements Expression, AstNode {
 	private Expression operand;
 	private int line;
 	private int column;
+
+	public BooleanNegation(Expression operand) {
+		this.operand = operand;
+	}
 
 	public Expression getOperand() {
 		return operand;

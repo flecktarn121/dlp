@@ -10,6 +10,11 @@ public class Assigment implements AstNode, Statement {
 	private Expression left;
 	private Expression right;
 
+	public Assigment(Expression left, Expression right) {
+		this.left = left;
+		this.right = right;
+	}
+
 	@Override
 	public int getLine() {
 

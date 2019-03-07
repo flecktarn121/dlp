@@ -13,6 +13,12 @@ public class FunctionDefinition implements AstNode, Definition {
 	private int column;
 	private List<Statement> body;
 
+	public FunctionDefinition(String name, Type type, List<Statement> body) {
+		this.name = name;
+		this.body = body;
+		this.type = type;
+	}
+
 	@Override
 	public String getName() {
 		return name;

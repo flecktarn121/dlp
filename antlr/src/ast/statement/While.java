@@ -12,6 +12,11 @@ public class While implements AstNode, Statement {
 	private Expression condition;
 	private List<Statement> body;
 
+	public While(Expression condition, List<Statement> body) {
+		this.condition = condition;
+		this.body = body;
+	}
+
 	public Expression getCondition() {
 		return condition;
 	}

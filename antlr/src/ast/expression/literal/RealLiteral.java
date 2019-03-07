@@ -10,7 +10,6 @@ public class RealLiteral implements Expression, AstNode {
 
 	public RealLiteral(double value) {
 		this.value = value;
-		Double.par
 	}
 	public double getValue() {
 		return value;

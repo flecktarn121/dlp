@@ -13,6 +13,12 @@ public class If implements AstNode, Statement {
 	private List<Statement> thenBody;
 	private List<Statement> elseBody;
 
+	public If(Expression condition, List<Statement> thenBody, List<Statement> elseBody) {
+		this.condition = condition;
+		this.thenBody = thenBody;
+		this.elseBody = elseBody;
+	}
+
 	public Expression getCondition() {
 		return condition;
 	}
