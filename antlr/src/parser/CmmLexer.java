@@ -9,6 +9,7 @@ package parser;
 	import ast.statement.*;
 	import ast.type.*;
 	import java.util.*;
+	import parser.*;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

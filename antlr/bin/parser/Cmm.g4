@@ -8,6 +8,7 @@ grammar Cmm;
 	import ast.statement.*;
 	import ast.type.*;
 	import java.util.*;
+	import parser.*;
 }
 program: definition+
        ;
@@ -16,15 +17,15 @@ program: definition+
 
 definition returns [Definition ast]:
 			type{Type type = $type.ast;} id1=ID{List<Expression> args = new ArrayList<VariableDefinition>(); args.add(new VariableDefinition());} (',' id2=ID {args.add($id2.text);})* ';'
-			|('void'|type) ID '(' (type ID (',' type ID)*)? ')''{'(statement|definition)*'}'
-			|'struct''{' (type ID ';')+ '}'ID ';'
+			|{Type type = null;}('void {type = new BaseType("void");}'|t1=type {type = $t1.ast;}) id1=ID '('{List<VariableDefinition> params = new ArrayList<VariableDefinition>();} (t2=type id2=ID {params.add(new VariableDefinition($id2.text, $t2.ast));} (',' t3=type id3=ID{params.add(new VariableDefinition($id3.text, $t3.ast));})*)? ')' {Type funType = new FunctionType(type, params)}'{'(statement|definition)*'}'
+			|'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID ';'{fields.add(new RecordType($id1.text, $type.ast));})+ '}'id2=ID {$ast = new StructType($id2.text, params);}';'
 			;
 
 type returns [Type ast]:
 		'int'{$ast = new BaseType("int");}
 	  |'char'{$ast = new BaseType("char");}
 	  |'double'{$ast = new BaseType("double");}
-	  |type('['expr']')
+	  |type('['expr']')+
 	  ;
 	
 statement returns [Statement ast]:
@@ -45,10 +46,10 @@ block returns [List<Statement> ast = new ArrayList<Statement>()]:
 expr returns [Expression ast]:
 			ID { $ast = new Variable($ID.text); }
 			|REAL_CONSTANT { $ast = new RealLiteral(Double.parseDouble($REAL_CONSTANT.text)); }
-			|CHAR_CONSTANT
+			|CHAR_CONSTANT {$ast = new CharacterLiteral(LexerHelper.lexemeToChar($CHAR_CONSTANT.text));}
 			|INT_CONSTANT { $ast = new RealLiteral(Integer.parseInt($INT_CONSTANT.text)); }
 			|e1=expr '[' e2=expr ']' //array access { $ast = new ArrayAccess($e2.ast); }
-			|ID '('{ List<Expression> params = new ArrayList<Expression>(); }(e1=expr {params.add($e1.ast); } (',' e2=expr {params.add($e1.ast); })*)? ')' { $ast = new ArrayAccess($e2.ast); }//function acess
+			|ID '('{ List<Expression> params = new ArrayList<Expression>(); }(e1=expr {params.add($e1.ast); } (',' e2=expr {params.add($e2.ast); })*)? ')' { $ast = new ArrayAccess($e2.ast); }//function acess
 			|expr'.'ID { $ast = new FieldAccess($ID.text); }
 			|'('type')' expr {$ast = new Cast($type.ast, $expr.ast); } //cast			
 			| '(' expr ')' {$ast = $expr.ast;}

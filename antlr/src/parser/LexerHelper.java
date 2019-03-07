@@ -12,36 +12,21 @@ public class LexerHelper {
 	}
 
 	public static char lexemeToChar(String text) {
-		String[] lexeme = text.split("'");
-		if(!lexeme[0].equalsIgnoreCase("\\")) {
-			System.out.println(lexeme[0]);
-			return lexeme[0].charAt(0);
-		}else {
-			return convetToSpecilaChar(text);
+		char[] chars = text.toCharArray();
+		if(chars[1] == '\\'){
+			if(chars[2] != 'n' && chars[2] != 't') {
+				return (char) Character.getNumericValue(Integer.parseInt(text.substring(2, text.length()-1)));
+			}
+			else {
+				char result = (char) ('\\' + chars[2]);
+				return result;
+			}
+		}
+		else {
+			return chars[2];
 		}
 	}
 
-	private static char convetToSpecilaChar(String text) {
-		String[] lexeme = text.split("'");
-		if(lexeme[1].equals("t")) {
-			return '\t';
-		}else if (lexeme[1].equals("n")) {
-			return '\n';
-		}else if (lexeme[1].equals("r")) {
-			return '\r';
-		}else if (lexeme[1].equals(" ")) {
-			return ' ';
-		}else {
-			String ascciCode = "";
-			for(String value: lexeme) {
-				if(!value.equals("\t")) {
-					ascciCode += value;
-				}
-			}
-			int intCode = Integer.parseInt(ascciCode);
-			return (char) intCode;
-		}
-	}
 
 	public static double lexemeToReal(String text) {
 		return Double.valueOf(text);

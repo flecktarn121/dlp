@@ -16,6 +16,12 @@ public class FunctionType implements Type, AstNode{
 		return returnType;
 	}
 
+	public FunctionType(Type returnType, List<VariableDefinition> paramType) {
+		super();
+		this.returnType = returnType;
+		this.paramType = paramType;
+	}
+
 	public void setReturnType(Type returnType) {
 		this.returnType = returnType;
 	}

@@ -7,9 +7,17 @@ public class VariableDefinition implements Definition, AstNode {
 
 	private String name;
 	private Type type;
+	
+	public VariableDefinition(String name, Type type) {
+		super();
+		this.name = name;
+		this.type = type;
+	}
+
 	private int line;
 	private int column;
 
+	
 	@Override
 	public String getName() {
 		return name;
