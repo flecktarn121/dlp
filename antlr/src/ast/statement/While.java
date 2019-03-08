@@ -52,6 +52,7 @@ public class While implements AstNode, Statement {
 
 	@Override
 	public String toString() {
-		return "While [line=" + line + ", column=" + column + ", condition=" + condition + ", body=" + body + "]";
+		return "While [line=" + line + ", column=" + column + ", condition=" + condition + ", body=" + body.size()
+				+ "]";
 	}
 }

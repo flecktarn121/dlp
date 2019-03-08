@@ -52,6 +52,7 @@ public class Function implements AstNode, Statement {
 
 	@Override
 	public String toString() {
-		return "Function [column=" + column + ", line=" + line + ", name=" + name + ", parameters=" + parameters + "]";
+		return "Function [column=" + column + ", line=" + line + ", name=" + name + ", parameters=" + parameters.size()
+				+ "]";
 	}
 }

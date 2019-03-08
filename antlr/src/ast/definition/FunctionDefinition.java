@@ -56,7 +56,7 @@ public class FunctionDefinition implements AstNode, Definition {
 	@Override
 	public String toString() {
 		return "FunctionDefinition [name=" + name + ", type=" + type + ", line=" + line + ", column=" + column
-				+ ", body=" + body + "]";
+				+ ", body elements=" + body.size() + "]";
 	}
 
 }

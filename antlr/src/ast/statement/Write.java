@@ -40,6 +40,6 @@ public class Write implements AstNode, Statement {
 
 	@Override
 	public String toString() {
-		return "Write [line=" + line + ", column=" + column + ", arguments=" + arguments + "]";
+		return "Write [line=" + line + ", column=" + column + ", arguments=" + arguments.size() + "]";
 	}
 }

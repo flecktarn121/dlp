@@ -62,7 +62,7 @@ public class If implements AstNode, Statement {
 
 	@Override
 	public String toString() {
-		return "If [line=" + line + ", column=" + column + ", condition=" + condition + ", thenBody=" + thenBody
-				+ ", elseBody=" + elseBody + "]";
+		return "If [line=" + line + ", column=" + column + ", condition=" + condition + ", thenBody=" + thenBody.size()
+				+ ", elseBody=" + elseBody.size() + "]";
 	}
 }

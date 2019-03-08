@@ -11,15 +11,14 @@ grammar Cmm;
 	import parser.*;
 }
 program returns [Program ast]:
-		{List<Definition> prog = new ArrayList<Definition>();}(definition{prog.add($definition.ast);})+{$ast = new Program(prog);}
+		{List<Definition> prog = new ArrayList<Definition>();}(definition{prog.addAll($definition.ast);})+{$ast = new Program(prog);} EOF
        ;
        
 /* SYNTAX RULES */
 
-definition returns [Definition ast]:
-			type{Type type = $type.ast;} id1=ID{ VariableDefinition varDef = new VariableDefinition($id1.text, type); $ast = varDef;} ({List<VariableDefinition> args = new ArrayList<VariableDefinition>();} ',' id2=ID {args.add(new VariableDefinition($id2.text, $type.ast));$ast = new MultipleVarDefinition(type, args);})* ';'
-			|{Type type = null;}('void' {type = new BaseType("void");}|t1=type {type = $t1.ast;}) id1=ID '('{List<VariableDefinition> params = new ArrayList<VariableDefinition>();} (t2=type id2=ID {params.add(new VariableDefinition($id2.text, $t2.ast));} (',' t3=type id3=ID{params.add(new VariableDefinition($id3.text, $t3.ast));})*)? ')' {Type funType = new FunctionType(type, params);}'{'{List<Body> body = new ArrayList<Body>();} (statement {body.add($statement.ast);}|definition {body.add($definition.ast);} )*'}'{$ast = new FunctionDefinition($id1.text, type, body); }
-			|'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID ';'{fields.add(new RecordType($id1.text, $type.ast));})+ '}'id2=ID {$ast = new StructDef( fields, $id2.text);}';'
+definition returns [List<Definition> ast = new ArrayList<Definition>()]:
+			type{Type type = $type.ast;} id1=ID{ VariableDefinition varDef = new VariableDefinition($id1.text, type); $ast.add(varDef);} (',' id2=ID {$ast.add(new VariableDefinition($id2.text, $type.ast));})* ';'
+			|{Type type = null;}('void' {type = new BaseType("void");}|t1=type {type = $t1.ast;}) id1=ID '('{List<VariableDefinition> params = new ArrayList<VariableDefinition>();} (t2=type id2=ID {params.add(new VariableDefinition($id2.text, $t2.ast));} (',' t3=type id3=ID{params.add(new VariableDefinition($id3.text, $t3.ast));})*)? ')' {Type funType = new FunctionType(type, params);}'{'{List<Body> body = new ArrayList<Body>();} (statement {body.add($statement.ast);}|definition {body.addAll($definition.ast);} )*'}'{$ast.add( new FunctionDefinition($id1.text, funType, body)); }
 			;
 
 type returns [Type ast]:
@@ -27,6 +26,7 @@ type returns [Type ast]:
 	  |'char'{$ast = new BaseType("char");}
 	  |'double'{$ast = new BaseType("double");}
 	  |type('['expr']')+
+	  |'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID ';'{fields.add(new RecordType($id1.text, $type.ast));})+ '}'{$ast = new StructType( fields);}
 	  ;
 	
 statement returns [Statement ast]:
@@ -40,8 +40,8 @@ statement returns [Statement ast]:
 		;
 		
 block returns [List<Body> ast = new ArrayList<Body>()]:
-		(statement {$ast.add($statement.ast);} |definition {$ast.add($definition.ast);} ) 
-		| '{' (statement {$ast.add($statement.ast);} | definition {$ast.add($definition.ast);} )* '}'
+		(statement {$ast.add($statement.ast);} |definition {$ast.addAll($definition.ast);} ) 
+		| '{' (statement {$ast.add($statement.ast);} | definition {$ast.addAll($definition.ast);} )* '}'
 		;
 		
 expr returns [Expression ast]:

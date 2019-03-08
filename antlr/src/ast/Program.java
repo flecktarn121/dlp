@@ -47,7 +47,7 @@ public class Program implements AstNode {
 
 	@Override
 	public String toString() {
-		return "Program [line=" + line + ", column=" + column + ", definitions=" + definitions + "]";
+		return "Program [line=" + line + ", column=" + column + ", definitions=" + definitions.size() + "]";
 	}
 
 }

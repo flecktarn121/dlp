@@ -34,7 +34,7 @@ public class FunctionCall implements Expression, AstNode {
 
 	@Override
 	public String toString() {
-		return "FunctionCall [column=" + column + ", line=" + line + ", name=" + name + ", parameters=" + parameters
-				+ "]";
+		return "FunctionCall [column=" + column + ", line=" + line + ", name=" + name + ", parameters="
+				+ parameters.size() + "]";
 	}
 }

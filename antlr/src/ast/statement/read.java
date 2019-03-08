@@ -41,6 +41,6 @@ public class read implements AstNode, Statement {
 
 	@Override
 	public String toString() {
-		return "read [line=" + line + ", column=" + column + ", arguments=" + arguments + "]";
+		return "read [line=" + line + ", column=" + column + ", arguments=" + arguments.size() + "]";
 	}
 }

@@ -48,7 +48,7 @@ public class MultipleVarDefinition implements Definition, AstNode {
 	@Override
 	public String toString() {
 		return "MultipleVarDefinition [line=" + line + ", column=" + column + ", type=" + type + ", definitions="
-				+ definitions + "]";
+				+ definitions.size() + "]";
 	}
 
 }
