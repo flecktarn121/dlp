@@ -18,7 +18,7 @@ program returns [Program ast]:
 
 definition returns [Definition ast]:
 			type{Type type = $type.ast;} id1=ID{ VariableDefinition varDef = new VariableDefinition($id1.text, type); $ast = varDef;} ({List<VariableDefinition> args = new ArrayList<VariableDefinition>();} ',' id2=ID {args.add(new VariableDefinition($id2.text, $type.ast));$ast = new MultipleVarDefinition(type, args);})* ';'
-			|{Type type = null;}('void {type = new BaseType("void");}'|t1=type {type = $t1.ast;}) id1=ID '('{List<VariableDefinition> params = new ArrayList<VariableDefinition>();} (t2=type id2=ID {params.add(new VariableDefinition($id2.text, $t2.ast));} (',' t3=type id3=ID{params.add(new VariableDefinition($id3.text, $t3.ast));})*)? ')' {Type funType = new FunctionType(type, params);}'{'{List<Body> body = new ArrayList<Body>();} (statement {body.add($statement.ast);}|definition {body.add($definition.ast);} )*'}'
+			|{Type type = null;}('void' {type = new BaseType("void");}|t1=type {type = $t1.ast;}) id1=ID '('{List<VariableDefinition> params = new ArrayList<VariableDefinition>();} (t2=type id2=ID {params.add(new VariableDefinition($id2.text, $t2.ast));} (',' t3=type id3=ID{params.add(new VariableDefinition($id3.text, $t3.ast));})*)? ')' {Type funType = new FunctionType(type, params);}'{'{List<Body> body = new ArrayList<Body>();} (statement {body.add($statement.ast);}|definition {body.add($definition.ast);} )*'}'{$ast = new FunctionDefinition($id1.text, type, body); }
 			|'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID ';'{fields.add(new RecordType($id1.text, $type.ast));})+ '}'id2=ID {$ast = new StructDef( fields, $id2.text);}';'
 			;
 
@@ -56,8 +56,8 @@ expr returns [Expression ast]:
 			| '(' expr ')' {$ast = $expr.ast;}
 			|e1=expr { String operand = ""; }  ('*' { operand = "*"; } |'/' { operand = "/"; }|'%' { operand = "%"; }) e2=expr { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast); }//arithmetic operation
 			|e3=expr { String operand = ""; } ( '+' { operand = "+"; } | '-' { operand = "-"; } ) e4=expr { $ast = new BinaryOperation(operand, $e3.ast, $e4.ast); } //arithmetic operation
-			|expr { String operand = ""; }  ('<'{ operand = "<"; }|'>'{ operand = ">"; }|'>='{ operand = ">="; }|'<='{ operand = "<="; }|'=='{ operand = "=="; }) { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast);}expr //
-			|expr { String operand = ""; }  ('&&' { operand = "&&"; }| '||'{ operand = "||"; } ) expr { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast);}
+			|e1=expr { String operand = ""; }  ('<'{ operand = "<"; }|'>'{ operand = ">"; }|'>='{ operand = ">="; }|'<='{ operand = "<="; }|'=='{ operand = "=="; }) e2=expr{ $ast = new BinaryOperation(operand, $e1.ast, $e2.ast);} //
+			|e1=expr { String operand = ""; }  ('&&' { operand = "&&"; }| '||'{ operand = "||"; } ) e2=expr { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast);}
 			|'!' expr { $ast = new BooleanNegation($expr.ast);} //boolean negation
 			|'-' expr { $ast = new UnaryMinus($expr.ast);}//unary minus
 			|ID { $ast = new Variable($ID.text); }

@@ -3,7 +3,7 @@ package ast.definition;
 import java.util.List;
 
 import ast.AstNode;
-import ast.statement.Statement;
+import ast.Body;
 import ast.type.Type;
 
 public class FunctionDefinition implements AstNode, Definition {
@@ -11,9 +11,9 @@ public class FunctionDefinition implements AstNode, Definition {
 	private Type type;
 	private int line;
 	private int column;
-	private List<Statement> body;
+	private List<Body> body;
 
-	public FunctionDefinition(String name, Type type, List<Statement> body) {
+	public FunctionDefinition(String name, Type type, List<Body> body) {
 		this.name = name;
 		this.body = body;
 		this.type = type;
@@ -39,11 +39,11 @@ public class FunctionDefinition implements AstNode, Definition {
 		return column;
 	}
 
-	public List<Statement> getBody() {
+	public List<Body> getBody() {
 		return body;
 	}
 
-	public void setBody(List<Statement> body) {
+	public void setBody(List<Body> body) {
 		this.body = body;
 	}
 
