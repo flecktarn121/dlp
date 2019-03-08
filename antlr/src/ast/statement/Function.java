@@ -17,6 +17,12 @@ public class Function implements AstNode, Statement {
 		this.setParameters(params);
 	}
 
+	public Function(String name, List<Expression> params, int line, int column) {
+		this(name, params);
+		this.line = line;
+		this.column = column;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -42,5 +48,10 @@ public class Function implements AstNode, Statement {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Function [column=" + column + ", line=" + line + ", name=" + name + ", parameters=" + parameters + "]";
 	}
 }

@@ -15,6 +15,12 @@ public class Assigment implements AstNode, Statement {
 		this.right = right;
 	}
 
+	public Assigment(Expression left, Expression right, int line, int column) {
+		this(left, right);
+		this.line = line;
+		this.column = column;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -40,6 +46,11 @@ public class Assigment implements AstNode, Statement {
 
 	public void setRight(Expression right) {
 		this.right = right;
+	}
+
+	@Override
+	public String toString() {
+		return "Assigment [line=" + line + ", column=" + column + ", left=" + left + ", right=" + right + "]";
 	}
 
 }

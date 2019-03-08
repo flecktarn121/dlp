@@ -16,6 +16,12 @@ public class BinaryOperation implements AstNode, Expression {
 		this.right = right;
 	}
 
+	public BinaryOperation(String operation, Expression left, Expression right, int line, int column) {
+		this(operation, left, right);
+		this.line = line;
+		this.column = column;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -49,5 +55,11 @@ public class BinaryOperation implements AstNode, Expression {
 
 	public void setLeft(Expression left) {
 		this.left = left;
+	}
+
+	@Override
+	public String toString() {
+		return "BinaryOperation [line=" + line + ", column=" + column + ", operation=" + operation + ", left=" + left
+				+ ", right=" + right + "]";
 	}
 }

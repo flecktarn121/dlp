@@ -12,6 +12,12 @@ public class UnaryMinus implements AstNode, Expression {
 		this.operand = operand;
 	}
 
+	public UnaryMinus(Expression operand, int line, int column) {
+		this(operand);
+		this.line = line;
+		this.column = column;
+	}
+
 	public Expression getOperand() {
 		return operand;
 	}
@@ -29,6 +35,11 @@ public class UnaryMinus implements AstNode, Expression {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "UnaryMinus [operand=" + operand + ", line=" + line + ", column=" + column + "]";
 	}
 
 }

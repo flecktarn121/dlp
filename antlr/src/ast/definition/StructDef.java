@@ -19,6 +19,12 @@ public class StructDef implements AstNode, Definition {
 		this.name = name;
 	}
 
+	public StructDef(List<RecordType> fields, String name, int line, int column) {
+		this(fields, name);
+		this.line = line;
+		this.column = column;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -32,14 +38,19 @@ public class StructDef implements AstNode, Definition {
 
 	@Override
 	public String getName() {
-		
+
 		return name;
 	}
 
 	@Override
 	public Type getType() {
-		
+
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "StructDef [line=" + line + ", column=" + column + ", fields=" + fields + ", name=" + name + "]";
 	}
 
 }

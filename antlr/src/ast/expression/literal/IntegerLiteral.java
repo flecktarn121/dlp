@@ -12,6 +12,12 @@ public class IntegerLiteral implements Expression, AstNode {
 		this.value = value;
 	}
 
+	public IntegerLiteral(int value, int line, int column) {
+		this(value);
+		this.line = line;
+		this.column = column;
+	}
+
 	public int getValue() {
 		return value;
 	}
@@ -29,5 +35,10 @@ public class IntegerLiteral implements Expression, AstNode {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "IntegerLiteral [value=" + value + ", line=" + line + ", column=" + column + "]";
 	}
 }

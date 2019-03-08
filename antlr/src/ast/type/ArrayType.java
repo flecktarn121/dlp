@@ -14,6 +14,12 @@ public class ArrayType implements Type, AstNode {
 		this.size = size;
 	}
 
+	public ArrayType(Type typeOf, Expression size, int line, int column) {
+		this(typeOf, size);
+		this.line = line;
+		this.column = column;
+	}
+
 	public Type getTypeOf() {
 		return typeOf;
 	}
@@ -39,5 +45,10 @@ public class ArrayType implements Type, AstNode {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "ArrayType [typeOf=" + typeOf + ", size=" + size + ", line=" + line + ", column=" + column + "]";
 	}
 }

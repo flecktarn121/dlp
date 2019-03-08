@@ -14,6 +14,12 @@ public class Write implements AstNode, Statement {
 		this.arguments = arguments;
 	}
 
+	public Write(List<Expression> arguments, int line, int column) {
+		this(arguments);
+		this.line = line;
+		this.column = column;
+	}
+
 	public List<Expression> getArguments() {
 		return arguments;
 	}
@@ -30,5 +36,10 @@ public class Write implements AstNode, Statement {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "Write [line=" + line + ", column=" + column + ", arguments=" + arguments + "]";
 	}
 }

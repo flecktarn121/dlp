@@ -15,6 +15,12 @@ public class FunctionCall implements Expression, AstNode {
 		this.parameters = params;
 	}
 
+	public FunctionCall(String name, List<Expression> params, int line, int column) {
+		this(name, params);
+		this.line = line;
+		this.column = column;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -24,5 +30,11 @@ public class FunctionCall implements Expression, AstNode {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "FunctionCall [column=" + column + ", line=" + line + ", name=" + name + ", parameters=" + parameters
+				+ "]";
 	}
 }

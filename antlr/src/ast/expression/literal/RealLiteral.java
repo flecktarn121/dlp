@@ -11,6 +11,13 @@ public class RealLiteral implements Expression, AstNode {
 	public RealLiteral(double value) {
 		this.value = value;
 	}
+
+	public RealLiteral(double value, int line, int column) {
+		this(value);
+		this.line = line;
+		this.column = column;
+	}
+
 	public double getValue() {
 		return value;
 	}
@@ -28,5 +35,10 @@ public class RealLiteral implements Expression, AstNode {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "RealLiteral [value=" + value + ", line=" + line + ", column=" + column + "]";
 	}
 }

@@ -11,6 +11,12 @@ public class BooleanNegation implements Expression, AstNode {
 		this.operand = operand;
 	}
 
+	public BooleanNegation(Expression operand, int line, int column) {
+		this(operand);
+		this.line = line;
+		this.column = column;
+	}
+
 	public Expression getOperand() {
 		return operand;
 	}
@@ -28,5 +34,10 @@ public class BooleanNegation implements Expression, AstNode {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "BooleanNegation [operand=" + operand + ", line=" + line + ", column=" + column + "]";
 	}
 }

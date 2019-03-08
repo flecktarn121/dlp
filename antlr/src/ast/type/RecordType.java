@@ -9,12 +9,16 @@ public class RecordType implements AstNode, Type {
 	private String name;
 	private Type type;
 
-	
-	
 	public RecordType(String name, Type type) {
 		super();
 		this.name = name;
 		this.type = type;
+	}
+
+	public RecordType(String name, Type type, int line, int column) {
+		this(name, type);
+		this.line = line;
+		this.column = column;
 	}
 
 	@Override
@@ -26,6 +30,11 @@ public class RecordType implements AstNode, Type {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "RecordType [line=" + line + ", column=" + column + ", name=" + name + ", type=" + type + "]";
 	}
 
 }

@@ -10,6 +10,13 @@ public class Variable implements Expression, AstNode {
 	public Variable(String name) {
 		this.name = name;
 	}
+
+	public Variable(String name, int line, int column) {
+		this(name);
+		this.line = line;
+		this.column = column;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -27,6 +34,11 @@ public class Variable implements Expression, AstNode {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Variable [name=" + name + ", line=" + line + ", column=" + column + "]";
 	}
 
 }

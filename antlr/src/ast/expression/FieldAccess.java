@@ -11,6 +11,12 @@ public class FieldAccess implements Expression, AstNode {
 		this.fieldName = fieldName;
 	}
 
+	public FieldAccess(String fieldName, int line, int column) {
+		this(fieldName);
+		this.line = line;
+		this.column = column;
+	}
+
 	public String getFieldName() {
 		return fieldName;
 	}
@@ -28,5 +34,10 @@ public class FieldAccess implements Expression, AstNode {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "FieldAccess [column=" + column + ", line=" + line + ", fieldName=" + fieldName + "]";
 	}
 }

@@ -19,6 +19,12 @@ public class FunctionDefinition implements AstNode, Definition {
 		this.type = type;
 	}
 
+	public FunctionDefinition(String name, Type type, List<Body> body, int line, int column) {
+		this(name, type, body);
+		this.column = column;
+		this.line = line;
+	}
+
 	@Override
 	public String getName() {
 		return name;
@@ -45,6 +51,12 @@ public class FunctionDefinition implements AstNode, Definition {
 
 	public void setBody(List<Body> body) {
 		this.body = body;
+	}
+
+	@Override
+	public String toString() {
+		return "FunctionDefinition [name=" + name + ", type=" + type + ", line=" + line + ", column=" + column
+				+ ", body=" + body + "]";
 	}
 
 }

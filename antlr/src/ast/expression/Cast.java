@@ -14,6 +14,12 @@ public class Cast implements Expression, AstNode {
 		this.operand = expr;
 	}
 
+	public Cast(Type type, Expression expr, int line, int column) {
+		this(type, expr);
+		this.line = line;
+		this.column = column;
+	}
+
 	public Type getType() {
 		return type;
 	}
@@ -39,5 +45,10 @@ public class Cast implements Expression, AstNode {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "Cast [type=" + type + ", operand=" + operand + ", line=" + line + ", column=" + column + "]";
 	}
 }

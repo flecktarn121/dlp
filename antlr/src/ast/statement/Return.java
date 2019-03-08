@@ -13,6 +13,12 @@ public class Return implements AstNode, Statement {
 		this.value = value;
 	}
 
+	public Return(Expression value, int line, int column) {
+		this(value);
+		this.line = line;
+		this.column = column;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -22,6 +28,11 @@ public class Return implements AstNode, Statement {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "Return [line=" + line + ", column=" + column + ", value=" + value + "]";
 	}
 
 }

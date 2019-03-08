@@ -12,6 +12,12 @@ public class BaseType implements AstNode, Type {
 		this.setName(name);
 	}
 
+	public BaseType(String name, int line, int column) {
+		this(name);
+		this.line = line;
+		this.column = column;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -29,6 +35,11 @@ public class BaseType implements AstNode, Type {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "BaseType [line=" + line + ", column=" + column + ", name=" + name + "]";
 	}
 
 }

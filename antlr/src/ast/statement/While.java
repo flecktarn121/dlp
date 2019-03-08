@@ -18,6 +18,12 @@ public class While implements AstNode, Statement {
 		this.body = body;
 	}
 
+	public While(Expression condition, List<Body> body, int line, int column) {
+		this(condition, body);
+		this.line = line;
+		this.column = column;
+	}
+
 	public Expression getCondition() {
 		return condition;
 	}
@@ -42,5 +48,10 @@ public class While implements AstNode, Statement {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "While [line=" + line + ", column=" + column + ", condition=" + condition + ", body=" + body + "]";
 	}
 }

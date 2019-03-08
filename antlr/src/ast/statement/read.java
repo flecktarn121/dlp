@@ -14,6 +14,13 @@ public class read implements AstNode, Statement {
 	public read(List<Expression> arguments) {
 		this.arguments = arguments;
 	}
+
+	public read(List<Expression> arguments, int line, int column) {
+		this(arguments);
+		this.line = line;
+		this.column = column;
+	}
+
 	public List<Expression> getArguments() {
 		return arguments;
 	}
@@ -30,5 +37,10 @@ public class read implements AstNode, Statement {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "read [line=" + line + ", column=" + column + ", arguments=" + arguments + "]";
 	}
 }

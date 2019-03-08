@@ -17,6 +17,12 @@ public class MultipleVarDefinition implements Definition, AstNode {
 		this.definitions = definitions;
 	}
 
+	public MultipleVarDefinition(Type type, List<VariableDefinition> definitions, int line, int column) {
+		this(type, definitions);
+		this.column = column;
+		this.line = line;
+	}
+
 	@Override
 	public int getLine() {
 
@@ -37,6 +43,12 @@ public class MultipleVarDefinition implements Definition, AstNode {
 	public Type getType() {
 
 		return type;
+	}
+
+	@Override
+	public String toString() {
+		return "MultipleVarDefinition [line=" + line + ", column=" + column + ", type=" + type + ", definitions="
+				+ definitions + "]";
 	}
 
 }

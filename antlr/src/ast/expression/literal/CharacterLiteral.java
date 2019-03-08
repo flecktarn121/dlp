@@ -12,6 +12,12 @@ public class CharacterLiteral implements Expression, AstNode {
 		this.value = value;
 	}
 
+	public CharacterLiteral(char value, int line, int column) {
+		this(value);
+		this.line = line;
+		this.column = column;
+	}
+
 	public char getValue() {
 		return value;
 	}
@@ -29,5 +35,10 @@ public class CharacterLiteral implements Expression, AstNode {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "CharacterLiteral [value=" + value + ", line=" + line + ", column=" + column + "]";
 	}
 }

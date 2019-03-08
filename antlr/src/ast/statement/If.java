@@ -20,6 +20,12 @@ public class If implements AstNode, Statement {
 		this.elseBody = elseBody;
 	}
 
+	public If(Expression condition, List<Body> thenBody, List<Body> elseBody, int line, int column) {
+		this(condition, thenBody, elseBody);
+		this.line = line;
+		this.column = column;
+	}
+
 	public Expression getCondition() {
 		return condition;
 	}
@@ -52,5 +58,11 @@ public class If implements AstNode, Statement {
 	@Override
 	public int getColumn() {
 		return column;
+	}
+
+	@Override
+	public String toString() {
+		return "If [line=" + line + ", column=" + column + ", condition=" + condition + ", thenBody=" + thenBody
+				+ ", elseBody=" + elseBody + "]";
 	}
 }
