@@ -4,6 +4,7 @@ import java.util.List;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class Function implements AstNode, Statement {
 
@@ -54,5 +55,10 @@ public class Function implements AstNode, Statement {
 	public String toString() {
 		return "Function [column=" + column + ", line=" + line + ", name=" + name + ", parameters=" + parameters.size()
 				+ "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

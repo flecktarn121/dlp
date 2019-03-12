@@ -4,6 +4,7 @@ import java.util.List;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class Write implements AstNode, Statement {
 	private int line;
@@ -41,5 +42,10 @@ public class Write implements AstNode, Statement {
 	@Override
 	public String toString() {
 		return "Write [line=" + line + ", column=" + column + ", arguments=" + arguments.size() + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class read implements AstNode, Statement {
 
@@ -42,5 +43,10 @@ public class read implements AstNode, Statement {
 	@Override
 	public String toString() {
 		return "read [line=" + line + ", column=" + column + ", arguments=" + arguments.size() + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

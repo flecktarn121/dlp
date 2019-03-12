@@ -4,6 +4,7 @@ import java.util.List;
 
 import ast.AstNode;
 import ast.type.Type;
+import visitor.Visitor;
 
 public class MultipleVarDefinition implements Definition, AstNode {
 
@@ -49,6 +50,11 @@ public class MultipleVarDefinition implements Definition, AstNode {
 	public String toString() {
 		return "MultipleVarDefinition [line=" + line + ", column=" + column + ", type=" + type + ", definitions="
 				+ definitions.size() + "]";
+	}
+	
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return null;
 	}
 
 }

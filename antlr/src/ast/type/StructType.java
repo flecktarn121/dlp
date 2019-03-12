@@ -3,6 +3,7 @@ package ast.type;
 import java.util.List;
 
 import ast.AstNode;
+import visitor.Visitor;
 
 public class StructType implements AstNode, Type {
 
@@ -34,7 +35,12 @@ public class StructType implements AstNode, Type {
 
 	@Override
 	public String toString() {
-		return "StructDef [line=" + line + ", column=" + column + ", fields=" + fields.size() +"]";
+		return "StructDef [line=" + line + ", column=" + column + ", fields=" + fields.size() + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 
 }

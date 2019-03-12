@@ -2,12 +2,14 @@ package ast.expression;
 
 import ast.AstNode;
 import ast.type.Type;
+import visitor.Visitor;
 
 public class Cast implements Expression, AstNode {
 	private Type type;
 	private Expression operand;
 	private int line;
 	private int column;
+	private boolean lValue;
 
 	public Cast(Type type, Expression expr) {
 		this.type = type;
@@ -50,5 +52,23 @@ public class Cast implements Expression, AstNode {
 	@Override
 	public String toString() {
 		return "Cast [type=" + type + ", operand=" + operand + ", line=" + line + ", column=" + column + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
+	}
+	
+
+	@Override
+	public boolean getLValue() {
+
+		return lValue;
+	}
+
+	@Override
+	public void setLValue(boolean lValue) {
+		this.lValue = lValue;
+
 	}
 }

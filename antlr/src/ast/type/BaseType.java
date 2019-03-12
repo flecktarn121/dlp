@@ -1,6 +1,7 @@
 package ast.type;
 
 import ast.AstNode;
+import visitor.Visitor;
 
 public class BaseType implements AstNode, Type {
 
@@ -40,6 +41,11 @@ public class BaseType implements AstNode, Type {
 	@Override
 	public String toString() {
 		return "BaseType [line=" + line + ", column=" + column + ", name=" + name + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return null;
 	}
 
 }

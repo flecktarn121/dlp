@@ -246,7 +246,7 @@ public class CmmParser extends Parser {
 					{
 					setState(38);
 					match(T__2);
-					type = new BaseType("void");
+					type = new VoidType();
 					}
 					break;
 				case T__7:
@@ -417,21 +417,21 @@ public class CmmParser extends Parser {
 				{
 				setState(83);
 				match(T__7);
-				((TypeContext)_localctx).ast =  new BaseType("int");
+				((TypeContext)_localctx).ast =  new IntType();
 				}
 				break;
 			case T__8:
 				{
 				setState(85);
 				match(T__8);
-				((TypeContext)_localctx).ast =  new BaseType("char");
+				((TypeContext)_localctx).ast =  new CharType();
 				}
 				break;
 			case T__9:
 				{
 				setState(87);
 				match(T__9);
-				((TypeContext)_localctx).ast =  new BaseType("double");
+				((TypeContext)_localctx).ast =  new RealType();
 				}
 				break;
 			case T__12:

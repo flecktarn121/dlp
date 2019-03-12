@@ -1,12 +1,14 @@
 package ast.expression;
 
 import ast.AstNode;
+import visitor.Visitor;
 
 public class UnaryMinus implements AstNode, Expression {
 
 	private Expression operand;
 	private int line;
 	private int column;
+	private boolean lValue;
 
 	public UnaryMinus(Expression operand) {
 		this.operand = operand;
@@ -40,6 +42,24 @@ public class UnaryMinus implements AstNode, Expression {
 	@Override
 	public String toString() {
 		return "UnaryMinus [operand=" + operand + ", line=" + line + ", column=" + column + "]";
+	}
+	
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
+	}
+	
+
+	@Override
+	public boolean getLValue() {
+
+		return lValue;
+	}
+
+	@Override
+	public void setLValue(boolean lValue) {
+		this.lValue = lValue;
+
 	}
 
 }

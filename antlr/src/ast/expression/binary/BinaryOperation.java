@@ -2,6 +2,7 @@ package ast.expression.binary;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class BinaryOperation implements AstNode, Expression {
 	private int line;
@@ -9,6 +10,7 @@ public class BinaryOperation implements AstNode, Expression {
 	private String operation;
 	private Expression left;
 	private Expression right;
+	private boolean lValue;
 
 	public BinaryOperation(String operation, Expression left, Expression right) {
 		this.operation = operation;
@@ -61,5 +63,23 @@ public class BinaryOperation implements AstNode, Expression {
 	public String toString() {
 		return "BinaryOperation [line=" + line + ", column=" + column + ", operation=" + operation + ", left=" + left
 				+ ", right=" + right + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
+	}
+	
+
+	@Override
+	public boolean getLValue() {
+
+		return lValue;
+	}
+
+	@Override
+	public void setLValue(boolean lValue) {
+		this.lValue = lValue;
+
 	}
 }

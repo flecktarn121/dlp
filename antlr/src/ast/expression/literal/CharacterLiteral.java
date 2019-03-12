@@ -2,11 +2,13 @@ package ast.expression.literal;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class CharacterLiteral implements Expression, AstNode {
 	private char value;
 	private int line;
 	private int column;
+	private boolean lValue;
 
 	public CharacterLiteral(char value) {
 		this.value = value;
@@ -40,5 +42,23 @@ public class CharacterLiteral implements Expression, AstNode {
 	@Override
 	public String toString() {
 		return "CharacterLiteral [value=" + value + ", line=" + line + ", column=" + column + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
+	}
+	
+
+	@Override
+	public boolean getLValue() {
+
+		return lValue;
+	}
+
+	@Override
+	public void setLValue(boolean lValue) {
+		this.lValue = lValue;
+
 	}
 }

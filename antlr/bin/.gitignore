@@ -1,5 +1,3 @@
-/Main.class
-/OldMain.class
 /ast/
 /parser/
-/test/
+/visitor/

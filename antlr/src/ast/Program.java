@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ast.definition.Definition;
+import visitor.Visitor;
 
 /**
  * Basic element of the AST
@@ -48,6 +49,11 @@ public class Program implements AstNode {
 	@Override
 	public String toString() {
 		return "Program [line=" + line + ", column=" + column + ", definitions=" + definitions.size() + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 
 }

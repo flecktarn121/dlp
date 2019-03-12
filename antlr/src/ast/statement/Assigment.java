@@ -2,6 +2,7 @@ package ast.statement;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class Assigment implements AstNode, Statement {
 
@@ -51,6 +52,11 @@ public class Assigment implements AstNode, Statement {
 	@Override
 	public String toString() {
 		return "Assigment [line=" + line + ", column=" + column + ", left=" + left + ", right=" + right + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 
 }

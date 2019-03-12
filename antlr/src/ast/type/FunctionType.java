@@ -5,6 +5,7 @@ import java.util.List;
 
 import ast.AstNode;
 import ast.definition.VariableDefinition;
+import visitor.Visitor;
 
 public class FunctionType implements Type, AstNode {
 	private Type returnType;
@@ -55,5 +56,10 @@ public class FunctionType implements Type, AstNode {
 	public String toString() {
 		return "FunctionType [returnType=" + returnType + ", paramType=" + paramType + ", line=" + line + ", column="
 				+ column + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

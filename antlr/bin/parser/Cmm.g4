@@ -18,13 +18,13 @@ program returns [Program ast]:
 
 definition returns [List<Definition> ast = new ArrayList<Definition>()]:
 			type{Type type = $type.ast;} id1=ID{ VariableDefinition varDef = new VariableDefinition($id1.text, type); $ast.add(varDef);} (',' id2=ID {$ast.add(new VariableDefinition($id2.text, $type.ast));})* ';'
-			|{Type type = null;}('void' {type = new BaseType("void");}|t1=type {type = $t1.ast;}) id1=ID '('{List<VariableDefinition> params = new ArrayList<VariableDefinition>();} (t2=type id2=ID {params.add(new VariableDefinition($id2.text, $t2.ast));} (',' t3=type id3=ID{params.add(new VariableDefinition($id3.text, $t3.ast));})*)? ')' {Type funType = new FunctionType(type, params);}'{'{List<Body> body = new ArrayList<Body>();} (statement {body.add($statement.ast);}|definition {body.addAll($definition.ast);} )*'}'{$ast.add( new FunctionDefinition($id1.text, funType, body)); }
+			|{Type type = null;}('void' {type = new VoidType();}|t1=type {type = $t1.ast;}) id1=ID '('{List<VariableDefinition> params = new ArrayList<VariableDefinition>();} (t2=type id2=ID {params.add(new VariableDefinition($id2.text, $t2.ast));} (',' t3=type id3=ID{params.add(new VariableDefinition($id3.text, $t3.ast));})*)? ')' {Type funType = new FunctionType(type, params);}'{'{List<Body> body = new ArrayList<Body>();} (statement {body.add($statement.ast);}|definition {body.addAll($definition.ast);} )*'}'{$ast.add( new FunctionDefinition($id1.text, funType, body)); }
 			;
 
 type returns [Type ast]:
-		'int'{$ast = new BaseType("int");}
-	  |'char'{$ast = new BaseType("char");}
-	  |'double'{$ast = new BaseType("double");}
+		'int'{$ast = new IntType();}
+	  |'char'{$ast = new CharType();}
+	  |'double'{$ast = new RealType();}
 	  |type('['expr']')+
 	  |'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID ';'{fields.add(new RecordType($id1.text, $type.ast));})+ '}'{$ast = new StructType( fields);}
 	  ;

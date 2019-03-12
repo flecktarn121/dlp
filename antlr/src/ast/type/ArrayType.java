@@ -2,6 +2,7 @@ package ast.type;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class ArrayType implements Type, AstNode {
 	private Type typeOf;
@@ -50,5 +51,10 @@ public class ArrayType implements Type, AstNode {
 	@Override
 	public String toString() {
 		return "ArrayType [typeOf=" + typeOf + ", size=" + size + ", line=" + line + ", column=" + column + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

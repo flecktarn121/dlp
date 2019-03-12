@@ -1,15 +1,17 @@
-package ast.expression.literal;
+package ast.type;
 
 import ast.AstNode;
-import ast.expression.Expression;
 import visitor.Visitor;
 
-public class VoidLiteral implements Expression, AstNode {
+public class CharType implements AstNode, Type {
 	private int line;
 	private int column;
-	private boolean lValue;
 
-	public VoidLiteral(int line, int column) {
+	public CharType() {
+
+	}
+
+	public CharType(int line, int column) {
 		this.line = line;
 		this.column = column;
 	}
@@ -27,24 +29,11 @@ public class VoidLiteral implements Expression, AstNode {
 
 	@Override
 	public String toString() {
-		return "VoidLiteral [line=" + line + ", column=" + column + "]";
+		return "CharType [line=" + line + ", column=" + column + "]";
 	}
 
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
-	}
-	
-
-	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
 	}
 }

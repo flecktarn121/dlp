@@ -2,6 +2,7 @@ package ast.definition;
 
 import ast.AstNode;
 import ast.type.Type;
+import visitor.Visitor;
 
 public class VariableDefinition implements Definition, AstNode {
 
@@ -47,5 +48,10 @@ public class VariableDefinition implements Definition, AstNode {
 	@Override
 	public String toString() {
 		return "VariableDefinition [name=" + name + ", type=" + type + ", line=" + line + ", column=" + column + "]";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

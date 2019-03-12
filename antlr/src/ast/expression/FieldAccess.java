@@ -1,11 +1,13 @@
 package ast.expression;
 
 import ast.AstNode;
+import visitor.Visitor;
 
 public class FieldAccess implements Expression, AstNode {
 	private int column;
 	private int line;
 	private String fieldName;
+	private boolean lValue;
 
 	public FieldAccess(String fieldName) {
 		this.fieldName = fieldName;
@@ -39,5 +41,23 @@ public class FieldAccess implements Expression, AstNode {
 	@Override
 	public String toString() {
 		return "FieldAccess [column=" + column + ", line=" + line + ", fieldName=" + fieldName + "]";
+	}
+	
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
+	}
+	
+
+	@Override
+	public boolean getLValue() {
+
+		return lValue;
+	}
+
+	@Override
+	public void setLValue(boolean lValue) {
+		this.lValue = lValue;
+
 	}
 }
