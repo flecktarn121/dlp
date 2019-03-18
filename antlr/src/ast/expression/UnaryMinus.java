@@ -8,7 +8,6 @@ public class UnaryMinus implements AstNode, Expression {
 	private Expression operand;
 	private int line;
 	private int column;
-	private boolean lValue;
 
 	public UnaryMinus(Expression operand) {
 		this.operand = operand;
@@ -48,18 +47,12 @@ public class UnaryMinus implements AstNode, Expression {
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
 	}
+
+	@Override
+	public boolean isLValue() {
+		
+		return false;
+	}
 	
-
-	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
-	}
 
 }

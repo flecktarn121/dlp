@@ -9,8 +9,6 @@ import ast.AstNode;
  *
  */
 public interface Expression extends AstNode {
-	boolean getLValue();
-
-	void setLValue(boolean lValue);
+	boolean isLValue();
 
 }

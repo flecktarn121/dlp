@@ -10,7 +10,6 @@ public class FunctionCall implements Expression, AstNode {
 	private int line;
 	private String name;
 	private List<Expression> parameters;
-	private boolean lValue;
 
 	public FunctionCall(String name, List<Expression> params) {
 		this.name = name;
@@ -51,14 +50,7 @@ public class FunctionCall implements Expression, AstNode {
 	
 
 	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
+	public boolean isLValue() {
+		return false;
 	}
 }

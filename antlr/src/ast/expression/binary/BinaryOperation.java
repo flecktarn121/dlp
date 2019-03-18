@@ -10,7 +10,6 @@ public class BinaryOperation implements AstNode, Expression {
 	private String operation;
 	private Expression left;
 	private Expression right;
-	private boolean lValue;
 
 	public BinaryOperation(String operation, Expression left, Expression right) {
 		this.operation = operation;
@@ -69,17 +68,10 @@ public class BinaryOperation implements AstNode, Expression {
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
 	}
-	
 
 	@Override
-	public boolean getLValue() {
+	public boolean isLValue() {
 
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
+		return false;
 	}
 }

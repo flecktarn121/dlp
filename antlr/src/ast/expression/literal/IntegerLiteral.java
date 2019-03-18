@@ -8,7 +8,6 @@ public class IntegerLiteral implements Expression, AstNode {
 	private int value;
 	private int line;
 	private int column;
-	private boolean lValue;
 
 	public IntegerLiteral(int value) {
 		this.value = value;
@@ -49,16 +48,9 @@ public class IntegerLiteral implements Expression, AstNode {
 		return v.visit(this, param);
 	}
 	
-
 	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
+	public boolean isLValue() {
+		
+		return false;
 	}
 }

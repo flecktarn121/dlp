@@ -7,7 +7,6 @@ public class FieldAccess implements Expression, AstNode {
 	private int column;
 	private int line;
 	private String fieldName;
-	private boolean lValue;
 
 	public FieldAccess(String fieldName) {
 		this.fieldName = fieldName;
@@ -48,16 +47,8 @@ public class FieldAccess implements Expression, AstNode {
 		return v.visit(this, param);
 	}
 	
-
 	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
+	public boolean isLValue() {
+		return false;
 	}
 }

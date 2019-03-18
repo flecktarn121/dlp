@@ -7,7 +7,6 @@ public class ArrayAccess implements Expression, AstNode {
 	private Expression position;
 	private int line;
 	private int column;
-	private boolean lValue;
 
 	public ArrayAccess(Expression position) {
 		this.position = position;
@@ -49,14 +48,7 @@ public class ArrayAccess implements Expression, AstNode {
 	}
 
 	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
+	public boolean isLValue() {
+		return true;
 	}
 }

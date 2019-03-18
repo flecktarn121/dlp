@@ -7,7 +7,6 @@ import visitor.Visitor;
 public class VoidLiteral implements Expression, AstNode {
 	private int line;
 	private int column;
-	private boolean lValue;
 
 	public VoidLiteral(int line, int column) {
 		this.line = line;
@@ -34,17 +33,10 @@ public class VoidLiteral implements Expression, AstNode {
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
 	}
-	
 
 	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
+	public boolean isLValue() {
+		
+		return false;
 	}
 }

@@ -9,7 +9,6 @@ public class Cast implements Expression, AstNode {
 	private Expression operand;
 	private int line;
 	private int column;
-	private boolean lValue;
 
 	public Cast(Type type, Expression expr) {
 		this.type = type;
@@ -58,17 +57,10 @@ public class Cast implements Expression, AstNode {
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
 	}
-	
 
 	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
+	public boolean isLValue() {
+		
+		return false;
 	}
 }

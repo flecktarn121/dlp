@@ -8,7 +8,6 @@ public class RealLiteral implements Expression, AstNode {
 	private double value;
 	private int line;
 	private int column;
-	private boolean lValue;
 
 	public RealLiteral(double value) {
 		this.value = value;
@@ -51,14 +50,8 @@ public class RealLiteral implements Expression, AstNode {
 	
 
 	@Override
-	public boolean getLValue() {
-
-		return lValue;
-	}
-
-	@Override
-	public void setLValue(boolean lValue) {
-		this.lValue = lValue;
-
+	public boolean isLValue() {
+		
+		return false;
 	}
 }
