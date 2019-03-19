@@ -6,17 +6,17 @@ import ast.AstNode;
 import ast.expression.Expression;
 import visitor.Visitor;
 
-public class read implements AstNode, Statement {
+public class Read implements AstNode, Statement {
 
 	private int line;
 	private int column;
 	private List<Expression> arguments;
 
-	public read(List<Expression> arguments) {
+	public Read(List<Expression> arguments) {
 		this.arguments = arguments;
 	}
 
-	public read(List<Expression> arguments, int line, int column) {
+	public Read(List<Expression> arguments, int line, int column) {
 		this(arguments);
 		this.line = line;
 		this.column = column;

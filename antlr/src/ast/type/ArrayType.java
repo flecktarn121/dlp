@@ -11,6 +11,12 @@ public class ArrayType implements Type, AstNode {
 	private int column;
 
 	public ArrayType(Type typeOf, Expression size) {
+		if(typeOf instanceof ArrayType) {
+			Expression oldSize = this.size;
+			Type oldType = this.typeOf;
+			((ArrayType) typeOf).setSize(oldSize);
+			((ArrayType) typeOf).setTypeOf(oldType);
+		}
 		this.typeOf = typeOf;
 		this.size = size;
 	}

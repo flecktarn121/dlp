@@ -23,6 +23,7 @@ public class VariableDefinition implements Definition, AstNode {
 
 	private int line;
 	private int column;
+	private int scope;
 
 	@Override
 	public String getName() {
@@ -53,5 +54,16 @@ public class VariableDefinition implements Definition, AstNode {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+	
+	@Override
+	public int getScope() {
+		return scope;
+	}
+
+	@Override
+	public void setScope(int scope) {
+		this.scope = scope;
+		
 	}
 }

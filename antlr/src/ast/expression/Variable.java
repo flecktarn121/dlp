@@ -1,12 +1,14 @@
 package ast.expression;
 
 import ast.AstNode;
+import ast.definition.Definition;
 import visitor.Visitor;
 
 public class Variable implements Expression, AstNode {
 	private String name;
 	private int line;
 	private int column;
+	private Definition definition;
 
 	public Variable(String name) {
 		this.name = name;
@@ -50,6 +52,14 @@ public class Variable implements Expression, AstNode {
 	@Override
 	public boolean isLValue() {
 		return true;
+	}
+	
+	public void setDefinition(Definition definition) {
+		this.definition = definition;
+	}
+	
+	public Definition definition() {
+		return definition;
 	}
 	
 	

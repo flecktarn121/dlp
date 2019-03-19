@@ -13,4 +13,8 @@ public interface Definition extends Body {
 	public String getName();
 
 	public Type getType();
+
+	public int getScope();
+
+	public void setScope(int scope);
 }

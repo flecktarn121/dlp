@@ -49,6 +49,6 @@ public class FieldAccess implements Expression, AstNode {
 	
 	@Override
 	public boolean isLValue() {
-		return false;
+		return true;
 	}
 }

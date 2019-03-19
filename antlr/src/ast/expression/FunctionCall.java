@@ -9,6 +9,8 @@ public class FunctionCall implements Expression, AstNode {
 	private int column;
 	private int line;
 	private String name;
+	// TODO: use a variable instead of a name, because the fuction call must be
+	// linked to the function definition
 	private List<Expression> parameters;
 
 	public FunctionCall(String name, List<Expression> params) {
@@ -32,8 +34,8 @@ public class FunctionCall implements Expression, AstNode {
 	public int getColumn() {
 		return column;
 	}
-	
-	public List<Expression> getParameters(){
+
+	public List<Expression> getParameters() {
 		return parameters;
 	}
 
@@ -42,12 +44,11 @@ public class FunctionCall implements Expression, AstNode {
 		return "FunctionCall [column=" + column + ", line=" + line + ", name=" + name + ", parameters="
 				+ parameters.size() + "]";
 	}
-	
+
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
 	}
-	
 
 	@Override
 	public boolean isLValue() {

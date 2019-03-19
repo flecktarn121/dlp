@@ -115,7 +115,7 @@ public abstract class AbstractVisitor<TP, TR> implements Visitor<TP, TR> {
 	}
 
 	@Override
-	public TR visit(read e, TP param) {
+	public TR visit(Read e, TP param) {
 		e.getArguments().forEach((arg) -> arg.accept(this, param));
 		return null;
 	}

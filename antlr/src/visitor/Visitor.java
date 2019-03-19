@@ -21,7 +21,7 @@ import ast.statement.If;
 import ast.statement.Return;
 import ast.statement.While;
 import ast.statement.Write;
-import ast.statement.read;
+import ast.statement.Read;
 import ast.type.ArrayType;
 import ast.type.CharType;
 import ast.type.ErrorType;
@@ -67,7 +67,7 @@ public interface Visitor<TP, TR> {
 
 	TR visit(If e, TP param);
 
-	TR visit(read e, TP param);
+	TR visit(Read e, TP param);
 
 	TR visit(Return e, TP param);
 

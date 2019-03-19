@@ -13,6 +13,7 @@ public class FunctionDefinition implements AstNode, Definition {
 	private int line;
 	private int column;
 	private List<Body> body;
+	private int scope;
 
 	public FunctionDefinition(String name, Type type, List<Body> body) {
 		this.name = name;
@@ -63,6 +64,17 @@ public class FunctionDefinition implements AstNode, Definition {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+
+	@Override
+	public int getScope() {
+		return scope;
+	}
+
+	@Override
+	public void setScope(int scope) {
+		this.scope = scope;
+		
 	}
 
 }

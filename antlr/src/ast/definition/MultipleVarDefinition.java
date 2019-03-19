@@ -12,6 +12,7 @@ public class MultipleVarDefinition implements Definition, AstNode {
 	private int column;
 	private Type type;
 	private List<VariableDefinition> definitions;
+	private int scope;
 
 	public MultipleVarDefinition(Type type, List<VariableDefinition> definitions) {
 		this.type = type;
@@ -55,6 +56,17 @@ public class MultipleVarDefinition implements Definition, AstNode {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return null;
+	}
+	
+	@Override
+	public int getScope() {
+		return scope;
+	}
+
+	@Override
+	public void setScope(int scope) {
+		this.scope = scope;
+		
 	}
 
 }

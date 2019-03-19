@@ -25,12 +25,12 @@ type returns [Type ast]:
 		'int'{$ast = new IntType();}
 	  |'char'{$ast = new CharType();}
 	  |'double'{$ast = new RealType();}
-	  |type('['expr']')+
+	  |t1=type('['expr']')+{$ast=new ArrayType($t1.ast, $expr.ast);}
 	  |'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID ';'{fields.add(new RecordType($id1.text, $type.ast));})+ '}'{$ast = new StructType( fields);}
 	  ;
 	
 statement returns [Statement ast]:
-			'while' '(' expr ')' block {$ast = new While($expr.ast, $block.ast);}
+			'while' '(' expr ')' block {$ast = new While($expr.ast, $block.ast, $expr.getLine());}
 		   |'if' '(' expr ')' b1=block {List<Body> elseBody = new ArrayList<Body>();} ('else' b2=block {elseBody = $b2.ast;})? {$ast = new If($expr.ast, $b1.ast, elseBody);}
 		   |e1=expr '=' e2=expr  {$ast = new Assigment($e1.ast, $e2.ast);}';'
 		   |'write' e1=expr {List<Expression> args = new ArrayList<Expression>(); args.add($e1.ast);}(','e2=expr{args.add($e2.ast);})* ';'{$ast = new Write(args);}
@@ -45,22 +45,22 @@ block returns [List<Body> ast = new ArrayList<Body>()]:
 		;
 		
 expr returns [Expression ast]:
-			ID { $ast = new Variable($ID.text); }
-			|REAL_CONSTANT { $ast = new RealLiteral(Double.parseDouble($REAL_CONSTANT.text)); }
-			|CHAR_CONSTANT {$ast = new CharacterLiteral(LexerHelper.lexemeToChar($CHAR_CONSTANT.text));}
-			|INT_CONSTANT { $ast = new IntegerLiteral(Integer.parseInt($INT_CONSTANT.text)); }
-			|e1=expr '[' e2=expr ']' //array access { $ast = new ArrayAccess($e2.ast); }
-			|ID '('{ List<Expression> params = new ArrayList<Expression>(); }(e1=expr {params.add($e1.ast); } (',' e2=expr {params.add($e2.ast); })*)? ')' { $ast = new ArrayAccess($e2.ast); }//function acess
-			|expr'.'ID { $ast = new FieldAccess($ID.text); }
-			|'('type')' expr {$ast = new Cast($type.ast, $expr.ast); } //cast			
+			ID { $ast = new Variable($ID.text, $ID.getLine(), $ID.getCharPositionInLine() +1); }
+			|REAL_CONSTANT { $ast = new RealLiteral(Double.parseDouble($REAL_CONSTANT.text), $REAL_CONSTANT.getLine(), $REAL_CONSTANT.getCharPositionInLine() +1); }
+			|CHAR_CONSTANT {$ast = new CharacterLiteral(LexerHelper.lexemeToChar($CHAR_CONSTANT.text), $CHAR_CONSTANT.getLine(), $CHAR_CONSTANT.getCharPositionInLine() +1);}
+			|INT_CONSTANT { $ast = new IntegerLiteral(Integer.parseInt($INT_CONSTANT.text), $INT_CONSTANT.getLine(), $INT_CONSTANT.getCharPositionInLine() +1); }
+			|e1=expr '[' e2=expr ']' { $ast = new ArrayAccess($e2.ast, $e1.start.getLine(), $e1.start.getCharPositionInLine() +1); } //array access 
+			|ID '('{ List<Expression> params = new ArrayList<Expression>(); }(e1=expr {params.add($e1.ast); } (',' e2=expr {params.add($e2.ast); })*)? ')' { $ast = new FunctionCall($ID.text,params); }//function acess
+			|expr'.'ID { $ast = new FieldAccess($ID.text, $expr.start.getLine(), $expr.start.getCharPositionInLine() + 1); }
+			|'('type')' expr {$ast = new Cast($type.ast, $expr.ast, $expr.start.getLine(), $expr.start.getCharPositionInLine() + 1); } //cast			
 			| '(' expr ')' {$ast = $expr.ast;}
-			|e1=expr { String operand = ""; }  ('*' { operand = "*"; } |'/' { operand = "/"; }|'%' { operand = "%"; }) e2=expr { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast); }//arithmetic operation
-			|e3=expr { String operand = ""; } ( '+' { operand = "+"; } | '-' { operand = "-"; } ) e4=expr { $ast = new BinaryOperation(operand, $e3.ast, $e4.ast); } //arithmetic operation
-			|e1=expr { String operand = ""; }  ('<'{ operand = "<"; }|'>'{ operand = ">"; }|'>='{ operand = ">="; }|'<='{ operand = "<="; }|'=='{ operand = "=="; }) e2=expr{ $ast = new BinaryOperation(operand, $e1.ast, $e2.ast);} //
-			|e1=expr { String operand = ""; }  ('&&' { operand = "&&"; }| '||'{ operand = "||"; } ) e2=expr { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast);}
-			|'!' expr { $ast = new BooleanNegation($expr.ast);} //boolean negation
-			|'-' expr { $ast = new UnaryMinus($expr.ast);}//unary minus
-			|ID { $ast = new Variable($ID.text); }
+			|e1=expr { String operand = ""; }  ('*' { operand = "*"; } |'/' { operand = "/"; }|'%' { operand = "%"; }) e2=expr { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast, $e1.start.getLine(), $e1.start.getCharPositionInLine() +1); }//arithmetic operation
+			|e3=expr { String operand = ""; } ( '+' { operand = "+"; } | '-' { operand = "-"; } ) e4=expr { $ast = new BinaryOperation(operand, $e3.ast, $e4.ast, $e3.start.getLine(), $e3.start.getCharPositionInLine() +1); } //arithmetic operation
+			|e1=expr { String operand = ""; }  ('<'{ operand = "<"; }|'>'{ operand = ">"; }|'>='{ operand = ">="; }|'<='{ operand = "<="; }|'=='{ operand = "=="; }) e2=expr{ $ast = new BinaryOperation(operand, $e1.ast, $e2.ast, $e1.start.getLine(), $e1.start.getCharPositionInLine() +1);} //
+			|e1=expr { String operand = ""; }  ('&&' { operand = "&&"; }| '||'{ operand = "||"; } ) e2=expr { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast, $e1.start.getLine(), $e1.start.getCharPositionInLine() +1);}
+			|'!' expr { $ast = new BooleanNegation($expr.ast, $expr.start.getLine(), $expr.start.getCharPositionInLine() + 1 );} //boolean negation
+			|'-' expr { $ast = new UnaryMinus($expr.ast, $expr.start.getLine(), $expr.start.getCharPositionInLine() + 1 );}//unary minus
+			|ID { $ast = new Variable($ID.text, $ID.getLine(), $ID.getCharPositionInLine() +1); }
 			;
 			
 
