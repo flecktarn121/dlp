@@ -4,21 +4,22 @@ import java.util.List;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import ast.expression.Variable;
 import visitor.Visitor;
 
 public class Function implements AstNode, Statement {
 
 	private int column;
 	private int line;
-	private String name;
+	private Variable name;
 	private List<Expression> parameters;
 
-	public Function(String name, List<Expression> params) {
+	public Function(Variable name, List<Expression> params) {
 		this.setName(name);
 		this.setParameters(params);
 	}
 
-	public Function(String name, List<Expression> params, int line, int column) {
+	public Function(Variable name, List<Expression> params, int line, int column) {
 		this(name, params);
 		this.line = line;
 		this.column = column;
@@ -43,11 +44,11 @@ public class Function implements AstNode, Statement {
 		this.parameters = parameters;
 	}
 
-	public String getName() {
+	public Variable getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(Variable name) {
 		this.name = name;
 	}
 

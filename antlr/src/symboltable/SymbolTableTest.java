@@ -5,7 +5,7 @@ import ast.definition.VariableDefinition;
 public class SymbolTableTest {
 		
 	public void testInsert() {
-		SymbolTable st = new SymbolTable();
+		SymbolTable st = SymbolTable.getInstance();
 		VariableDefinition definition = new VariableDefinition("a", null,0, 0 );
 		assert st.insert(definition);
 		assert definition.getScope()==0;
@@ -20,7 +20,7 @@ public class SymbolTableTest {
 	}
 	
 	public void testFind() {
-		SymbolTable st = new SymbolTable();
+		SymbolTable st = SymbolTable.getInstance();
 		VariableDefinition varDefinition = new VariableDefinition("a", null,0, 0 );
 		assert st.insert(varDefinition);
 		assert st.find("a")!=null;
@@ -37,7 +37,7 @@ public class SymbolTableTest {
 	}
 
 	public void testFindInCurrentScope() {
-		SymbolTable st = new SymbolTable();
+		SymbolTable st = SymbolTable.getInstance();
 		VariableDefinition varDefinition = new VariableDefinition("a", null,0, 0 );
 		assert st.insert(varDefinition);
 		assert st.findInCurrentScope("a")!=null;

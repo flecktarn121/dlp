@@ -8,17 +8,23 @@ import visitor.Visitor;
 public class FunctionCall implements Expression, AstNode {
 	private int column;
 	private int line;
-	private String name;
-	// TODO: use a variable instead of a name, because the fuction call must be
-	// linked to the function definition
+	private Variable name;
+	public Variable getName() {
+		return name;
+	}
+
+	public void setName(Variable name) {
+		this.name = name;
+	}
+
 	private List<Expression> parameters;
 
-	public FunctionCall(String name, List<Expression> params) {
+	public FunctionCall(Variable name, List<Expression> params) {
 		this.name = name;
 		this.parameters = params;
 	}
 
-	public FunctionCall(String name, List<Expression> params, int line, int column) {
+	public FunctionCall(Variable name, List<Expression> params, int line, int column) {
 		this(name, params);
 		this.line = line;
 		this.column = column;
@@ -54,4 +60,6 @@ public class FunctionCall implements Expression, AstNode {
 	public boolean isLValue() {
 		return false;
 	}
+	
+	
 }

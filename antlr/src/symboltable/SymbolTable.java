@@ -12,10 +12,15 @@ public class SymbolTable {
 
 	private int scope = 0;
 	private List<Map<String, Definition>> table;
+	private static SymbolTable instance;
 
-	public SymbolTable() {
+	private SymbolTable() {
 		table = new ArrayList<Map<String, Definition>>();
 		table.add(new HashMap<String, Definition>());
+	}
+	
+	public static SymbolTable getInstance() {
+		return instance;
 	}
 
 	public void set() {

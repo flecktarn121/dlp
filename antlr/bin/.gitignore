@@ -1,4 +1,4 @@
-/parser/
-/visitor/
 /symboltable/
+/visitor/
 /ast/
+/parser/
