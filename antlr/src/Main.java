@@ -1,6 +1,7 @@
 
 import parser.*;
 import visitor.Visitor;
+import visitor.semantic.DeclarationVisitor;
 import visitor.semantic.LValueVisitor;
 
 import org.antlr.v4.runtime.*;
@@ -37,7 +38,15 @@ public class Main {
 		if (ErrorHandler.getInstance().anyError()) {
 			ErrorHandler.getInstance().showErrors(System.err);
 		} else {
-			System.out.println("The program is fine.");
+			System.out.println("The program has no LValue errors.");
+		}
+		
+		visitor = new DeclarationVisitor();
+		ast.accept(visitor, null);
+		if (ErrorHandler.getInstance().anyError()) {
+			ErrorHandler.getInstance().showErrors(System.err);
+		} else {
+			System.out.println("The program has no identification errors.");
 		}
 	}
 }

@@ -12,7 +12,7 @@ public class SymbolTable {
 
 	private int scope = 0;
 	private List<Map<String, Definition>> table;
-	private static SymbolTable instance;
+	private static SymbolTable instance = new SymbolTable();
 
 	private SymbolTable() {
 		table = new ArrayList<Map<String, Definition>>();

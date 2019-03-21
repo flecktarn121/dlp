@@ -13,6 +13,7 @@ public class DeclarationVisitor extends AbstractVisitor<Void, Void> {
 
 	@Override
 	public Void visit(FunctionDefinition e, Void param) {
+		
 		super.visit(e, param);
 		if (!SymbolTable.getInstance().insert(e)) {
 			ErrorHandler.getInstance()
