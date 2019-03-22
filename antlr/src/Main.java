@@ -1,7 +1,7 @@
 
 import parser.*;
 import visitor.Visitor;
-import visitor.semantic.DeclarationVisitor;
+import visitor.semantic.IdentificationVisitor;
 import visitor.semantic.LValueVisitor;
 
 import org.antlr.v4.runtime.*;
@@ -20,7 +20,7 @@ public class Main {
 
 		// create a lexer that feeds off of input CharStream
 
-		CharStream input = CharStreams.fromFileName("input.txt");
+		CharStream input = CharStreams.fromFileName("input-wrong.txt");
 		CmmLexer lexer = new CmmLexer(input);
 
 		// create a parser that feeds off the tokens buffer
@@ -41,7 +41,7 @@ public class Main {
 			System.out.println("The program has no LValue errors.");
 		}
 		
-		visitor = new DeclarationVisitor();
+		visitor = new IdentificationVisitor();
 		ast.accept(visitor, null);
 		if (ErrorHandler.getInstance().anyError()) {
 			ErrorHandler.getInstance().showErrors(System.err);
