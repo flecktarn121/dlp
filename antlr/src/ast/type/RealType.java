@@ -3,7 +3,8 @@ package ast.type;
 import ast.AstNode;
 import visitor.Visitor;
 
-public class RealType implements Type, AstNode {
+public class RealType extends AbsractType {
+	public static final String NAME = "Real";
 	private int line;
 	private int column;
 
@@ -35,5 +36,34 @@ public class RealType implements Type, AstNode {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+
+	@Override
+	public boolean isLogical() {
+		return false;
+	}
+
+	@Override
+	public String getName() {
+
+		return NAME;
+	}
+
+	@Override
+	public Type arithmetic(Type type) {
+		if (type.getName().equals(this.getName())) {
+			return new RealType();
+		}
+		return super.arithmetic(type);
+	}
+
+	@Override
+	public boolean isComplex() {
+		return false;
+	}
+	
+	@Override
+	public boolean isNumber() {
+		return true;
 	}
 }

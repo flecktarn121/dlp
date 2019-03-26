@@ -1,12 +1,14 @@
 package ast.expression;
 
 import ast.AstNode;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class BooleanNegation implements Expression, AstNode {
 	private Expression operand;
 	private int line;
 	private int column;
+	private Type type;
 	public BooleanNegation(Expression operand) {
 		this.operand = operand;
 	}
@@ -50,6 +52,17 @@ public class BooleanNegation implements Expression, AstNode {
 	public boolean isLValue() {
 		
 		return false;
+	}
+	
+	@Override
+	public void setType(Type type) {
+		this.type = type;
+		
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 	
 }

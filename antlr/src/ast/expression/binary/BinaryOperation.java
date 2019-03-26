@@ -2,6 +2,7 @@ package ast.expression.binary;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class BinaryOperation implements AstNode, Expression {
@@ -10,6 +11,7 @@ public class BinaryOperation implements AstNode, Expression {
 	private String operation;
 	private Expression left;
 	private Expression right;
+	private Type type;
 
 	public BinaryOperation(String operation, Expression left, Expression right) {
 		this.operation = operation;
@@ -73,5 +75,16 @@ public class BinaryOperation implements AstNode, Expression {
 	public boolean isLValue() {
 
 		return false;
+	}
+	
+	@Override
+	public void setType(Type type) {
+		this.type = type;
+		
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 }

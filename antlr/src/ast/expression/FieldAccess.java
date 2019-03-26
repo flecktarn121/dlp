@@ -1,12 +1,14 @@
 package ast.expression;
 
 import ast.AstNode;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class FieldAccess implements Expression, AstNode {
 	private int column;
 	private int line;
 	private String fieldName;
+	private Type type;
 
 	public FieldAccess(String fieldName) {
 		this.fieldName = fieldName;
@@ -50,5 +52,16 @@ public class FieldAccess implements Expression, AstNode {
 	@Override
 	public boolean isLValue() {
 		return true;
+	}
+	
+	@Override
+	public void setType(Type type) {
+		this.type = type;
+		
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 }

@@ -3,6 +3,7 @@ package ast.expression;
 import java.util.List;
 
 import ast.AstNode;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class FunctionCall implements Expression, AstNode {
@@ -18,6 +19,7 @@ public class FunctionCall implements Expression, AstNode {
 	}
 
 	private List<Expression> parameters;
+	private Type type;
 
 	public FunctionCall(Variable name, List<Expression> params) {
 		this.name = name;
@@ -59,6 +61,17 @@ public class FunctionCall implements Expression, AstNode {
 	@Override
 	public boolean isLValue() {
 		return false;
+	}
+	
+	@Override
+	public void setType(Type type) {
+		this.type = type;
+		
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 	
 	

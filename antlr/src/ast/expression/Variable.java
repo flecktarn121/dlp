@@ -2,6 +2,7 @@ package ast.expression;
 
 import ast.AstNode;
 import ast.definition.Definition;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class Variable implements Expression, AstNode {
@@ -9,6 +10,7 @@ public class Variable implements Expression, AstNode {
 	private int line;
 	private int column;
 	private Definition definition;
+	private Type type;
 
 	public Variable(String name) {
 		this.name = name;
@@ -60,6 +62,17 @@ public class Variable implements Expression, AstNode {
 	
 	public Definition definition() {
 		return definition;
+	}
+
+	@Override
+	public void setType(Type type) {
+		this.type = type;
+		
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 	
 	

@@ -5,7 +5,7 @@ import java.util.List;
 import ast.AstNode;
 import visitor.Visitor;
 
-public class StructType implements AstNode, Type {
+public class StructType extends AbsractType {
 
 	private int line;
 	private int column;
@@ -42,5 +42,13 @@ public class StructType implements AstNode, Type {
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
 	}
+
+	@Override
+	public String getName() {
+		
+		return "Struct";
+	}
+	
+
 
 }

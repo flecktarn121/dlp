@@ -3,8 +3,9 @@ package ast.type;
 import ast.AstNode;
 import visitor.Visitor;
 
-public class IntType implements Type, AstNode {
+public class IntType extends AbsractType{
 
+	public static final String NAME = "integer";
 	private int line;
 	private int column;
 
@@ -36,5 +37,36 @@ public class IntType implements Type, AstNode {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+
+	
+	@Override
+	public boolean isLogical() {
+		return true;
+	}
+
+	@Override
+	public String getName() {
+	
+		return NAME;
+	}
+	
+	@Override
+	public Type arithmetic(Type type) {
+		if(type.getName().equals(this.getName())) {
+			return new IntType();
+		}
+		return super.arithmetic(type);
+	}
+	
+	@Override
+	public boolean isComplex() {
+		return false;
+	}
+	
+
+	@Override
+	public boolean isNumber() {
+		return true;
 	}
 }

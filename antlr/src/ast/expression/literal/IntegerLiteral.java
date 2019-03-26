@@ -2,12 +2,14 @@ package ast.expression.literal;
 
 import ast.AstNode;
 import ast.expression.Expression;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class IntegerLiteral implements Expression, AstNode {
 	private int value;
 	private int line;
 	private int column;
+	private Type type;
 
 	public IntegerLiteral(int value) {
 		this.value = value;
@@ -52,5 +54,16 @@ public class IntegerLiteral implements Expression, AstNode {
 	public boolean isLValue() {
 		
 		return false;
+	}
+	
+	@Override
+	public void setType(Type type) {
+		this.type = type;
+		
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 }

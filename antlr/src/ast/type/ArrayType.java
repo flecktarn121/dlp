@@ -1,17 +1,16 @@
 package ast.type;
 
-import ast.AstNode;
 import ast.expression.Expression;
 import visitor.Visitor;
 
-public class ArrayType implements Type, AstNode {
+public class ArrayType extends AbsractType{
 	private Type typeOf;
 	private Expression size;
 	private int line;
 	private int column;
 
 	public ArrayType(Type typeOf, Expression size) {
-		if(typeOf instanceof ArrayType) {
+		if (typeOf instanceof ArrayType) {
 			Expression oldSize = this.size;
 			Type oldType = this.typeOf;
 			((ArrayType) typeOf).setSize(oldSize);
@@ -62,5 +61,12 @@ public class ArrayType implements Type, AstNode {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+
+
+	@Override
+	public String getName() {
+		
+		return "array type";
 	}
 }

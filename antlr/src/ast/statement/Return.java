@@ -40,5 +40,9 @@ public class Return implements AstNode, Statement {
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
 	}
+	
+	public Expression getValue() {
+		return value;
+	}
 
 }

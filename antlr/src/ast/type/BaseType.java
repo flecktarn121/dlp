@@ -1,9 +1,8 @@
 package ast.type;
 
-import ast.AstNode;
 import visitor.Visitor;
 
-public class BaseType implements AstNode, Type {
+public class BaseType extends AbsractType {
 
 	private int line;
 	private int column;
@@ -47,5 +46,6 @@ public class BaseType implements AstNode, Type {
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return null;
 	}
+
 
 }

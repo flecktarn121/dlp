@@ -1,9 +1,8 @@
 package ast.type;
 
-import ast.AstNode;
 import visitor.Visitor;
 
-public class CharType implements AstNode, Type {
+public class CharType extends AbsractType {
 	private int line;
 	private int column;
 
@@ -35,5 +34,22 @@ public class CharType implements AstNode, Type {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+
+	@Override
+	public String getName() {
+		
+		return "character";
+	}
+
+	@Override
+	public Type arithmetic(Type type) {
+		//WE DO NOT SUPPORT IMPLICIT CONVERSION
+		return new ErrorType("The character type does not support arithmetic operations.");
+	}
+	
+	@Override
+	public boolean isComplex() {
+		return false;
 	}
 }

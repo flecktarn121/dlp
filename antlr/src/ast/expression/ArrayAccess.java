@@ -1,12 +1,14 @@
 package ast.expression;
 
 import ast.AstNode;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class ArrayAccess implements Expression, AstNode {
 	private Expression position;
 	private int line;
 	private int column;
+	private Type type;
 
 	public ArrayAccess(Expression position) {
 		this.position = position;
@@ -50,5 +52,16 @@ public class ArrayAccess implements Expression, AstNode {
 	@Override
 	public boolean isLValue() {
 		return true;
+	}
+	
+	@Override
+	public void setType(Type type) {
+		this.type = type;
+		
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 }

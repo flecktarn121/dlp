@@ -1,9 +1,9 @@
 package ast.type;
 
-import ast.AstNode;
 import visitor.Visitor;
 
-public class ErrorType implements Type, AstNode {
+public class ErrorType extends AbsractType {
+	public static final String NAME = "Error";
 	private int line;
 	private int column;
 	private String message;
@@ -40,6 +40,12 @@ public class ErrorType implements Type, AstNode {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+
+	@Override
+	public String getName() {
+		
+		return NAME;
 	}
 
 }

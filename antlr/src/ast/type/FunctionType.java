@@ -3,11 +3,10 @@ package ast.type;
 import java.util.ArrayList;
 import java.util.List;
 
-import ast.AstNode;
 import ast.definition.VariableDefinition;
 import visitor.Visitor;
 
-public class FunctionType implements Type, AstNode {
+public class FunctionType extends AbsractType{
 	private Type returnType;
 	private List<VariableDefinition> paramType;
 	private int line;
@@ -61,5 +60,11 @@ public class FunctionType implements Type, AstNode {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+
+	@Override
+	public String getName() {
+		
+		return "Function";
 	}
 }
