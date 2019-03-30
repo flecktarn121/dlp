@@ -45,7 +45,7 @@ public class CharType extends AbsractType {
 	@Override
 	public Type arithmetic(Type type) {
 		//WE DO NOT SUPPORT IMPLICIT CONVERSION
-		return new ErrorType("The character type does not support arithmetic operations.");
+		return new ErrorType("The character type does not support arithmetic operations.", line, column);
 	}
 	
 	@Override

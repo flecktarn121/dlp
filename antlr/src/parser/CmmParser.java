@@ -1040,7 +1040,7 @@ public class CmmParser extends Parser {
 				match(T__20);
 				setState(257);
 				((ExprContext)_localctx).id2 = match(ID);
-				 ((ExprContext)_localctx).ast =  new FieldAccess((((ExprContext)_localctx).id2!=null?((ExprContext)_localctx).id2.getText():null), ((ExprContext)_localctx).id1.getLine(), ((ExprContext)_localctx).id1.getCharPositionInLine() + 1); 
+				 ((ExprContext)_localctx).ast =  new FieldAccess((((ExprContext)_localctx).id2!=null?((ExprContext)_localctx).id2.getText():null),(((ExprContext)_localctx).id1!=null?((ExprContext)_localctx).id1.getText():null), ((ExprContext)_localctx).id1.getLine(), ((ExprContext)_localctx).id1.getCharPositionInLine() + 1); 
 				}
 				break;
 			case 7:

@@ -7,12 +7,12 @@ public class RecordType extends AbsractType {
 
 	private int line;
 	private int column;
-	private String name;
+	private String fieldName;
 	private Type type;
 
 	public RecordType(String name, Type type) {
 		super();
-		this.name = name;
+		this.setFieldName(name);
 		this.type = type;
 	}
 
@@ -35,7 +35,7 @@ public class RecordType extends AbsractType {
 
 	@Override
 	public String toString() {
-		return "RecordType [line=" + line + ", column=" + column + ", name=" + name + ", type=" + type + "]";
+		return "RecordType [line=" + line + ", column=" + column + ", name=" + fieldName + ", type=" + type + "]";
 	}
 
 	@Override
@@ -47,6 +47,14 @@ public class RecordType extends AbsractType {
 	public String getName() {
 		
 		return "Record";
+	}
+
+	public String getFieldName() {
+	    return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+	    this.fieldName = fieldName;
 	}
 
 }

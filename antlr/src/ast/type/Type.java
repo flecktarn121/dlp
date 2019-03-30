@@ -28,4 +28,6 @@ public interface Type extends AstNode {
 	boolean isComplex();
 	
 	boolean isNumber();
+	
+	boolean isRecord();
 }

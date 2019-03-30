@@ -21,6 +21,12 @@ public class StructType extends AbsractType {
 		this.line = line;
 		this.column = column;
 	}
+	
+
+	    @Override
+	    public boolean isRecord() {
+		return true;
+	    }
 
 	@Override
 	public int getLine() {
@@ -47,6 +53,14 @@ public class StructType extends AbsractType {
 	public String getName() {
 		
 		return "Struct";
+	}
+
+	public List<RecordType> getFields() {
+	    return fields;
+	}
+
+	public void setFields(List<RecordType> fields) {
+	    this.fields = fields;
 	}
 	
 

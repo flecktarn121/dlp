@@ -1,11 +1,9 @@
 package visitor.semantic;
 
-import ast.definition.FunctionDefinition;
 import ast.statement.Assigment;
 import ast.statement.Read;
 import ast.type.ErrorType;
 import parser.ErrorHandler;
-import symboltable.SymbolTable;
 import visitor.AbstractVisitor;
 
 public class LValueVisitor extends AbstractVisitor<Void, Void> {
@@ -15,7 +13,7 @@ public class LValueVisitor extends AbstractVisitor<Void, Void> {
 	if (!e.getLeft().isLValue()) {
 	    String mess = "Lvalue missmatch in assigment";
 
-	    ErrorHandler.getInstance().addError(new ErrorType(mess, e.getLine(), e.getColumn()));
+	    ErrorHandler.getInstance().addError(new ErrorType(mess, e.getLeft().getLine(), e.getLeft().getColumn()));
 	}
 	return null;
     }

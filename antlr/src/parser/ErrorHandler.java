@@ -29,4 +29,8 @@ public class ErrorHandler {
 	public void showErrors(PrintStream out) {
 		errors.forEach((error) -> out.println(error.toString()));
 	}
+	
+	public void clearErrors() {
+	    errors.clear();
+	}
 }

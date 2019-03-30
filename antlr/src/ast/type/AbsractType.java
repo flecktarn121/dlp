@@ -5,43 +5,49 @@ import visitor.Visitor;
 
 public abstract class AbsractType implements Type, AstNode {
 
-	@Override
-	public int getLine() {
+    @Override
+    public boolean isRecord() {
+	return false;
+    }
 
-		return 0;
-	}
+    @Override
+    public int getLine() {
 
-	@Override
-	public int getColumn() {
+	return 0;
+    }
 
-		return 0;
-	}
+    @Override
+    public int getColumn() {
 
-	@Override
-	public abstract <TP, TR> TR accept(Visitor<TP, TR> v, TP param);
+	return 0;
+    }
 
-	@Override
-	public boolean isLogical() {
-		return false;
-	}
+    @Override
+    public abstract <TP, TR> TR accept(Visitor<TP, TR> v, TP param);
 
-	@Override
-	public abstract String getName();
+    @Override
+    public boolean isLogical() {
+	return false;
+    }
 
-	@Override
-	public Type arithmetic(Type type) {
+    @Override
+    public abstract String getName();
 
-		return new ErrorType("The type " + getName() + " does not support arithmetic operation with " + type.getName());
-	}
-	
-	@Override
-	public boolean isComplex() {
-		return true;
-	}
-	
-	@Override
-	public boolean isNumber() {
-		return false;
-	}
+    @Override
+    public Type arithmetic(Type type) {
+
+	return new ErrorType("The type " + getName() + " does not support arithmetic operation with " + type.getName(),
+		getLine(), getColumn());
+    }
+
+    @Override
+    public boolean isComplex() {
+	return true;
+    }
+
+    @Override
+    public boolean isNumber() {
+	return false;
+    }
 
 }

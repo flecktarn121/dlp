@@ -60,7 +60,7 @@ public class Variable implements Expression, AstNode {
 		this.definition = definition;
 	}
 	
-	public Definition definition() {
+	public Definition getDefinition() {
 		return definition;
 	}
 
