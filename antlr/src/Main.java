@@ -24,7 +24,7 @@ public class Main {
 
 	// create a lexer that feeds off of input CharStream
 
-	CharStream input = CharStreams.fromFileName("input/input3-wrong.txt");
+	CharStream input = CharStreams.fromFileName("input/input4-wrong.txt");
 	CmmLexer lexer = new CmmLexer(input);
 
 	// create a parser that feeds off the tokens buffer
@@ -34,7 +34,7 @@ public class Main {
 
 	// * The AST is shown
 	IntrospectorModel model = new IntrospectorModel("Program", ast);
-	new IntrospectorTree("Introspector", model);
+	//new IntrospectorTree("Introspector", model);
 
 	// We visit the ast
 	Visitor<Void, Void> visitor = new LValueVisitor();

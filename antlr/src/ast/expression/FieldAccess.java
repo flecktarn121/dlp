@@ -1,6 +1,7 @@
 package ast.expression;
 
 import ast.AstNode;
+import ast.definition.Definition;
 import ast.type.Type;
 import visitor.Visitor;
 
@@ -9,7 +10,7 @@ public class FieldAccess implements Expression, AstNode {
     private int line;
     private String fieldName;
     private Type type;
-
+    private Definition struct;
     private String recordName;
 
     public FieldAccess(String fieldName, String recordName) {
@@ -75,4 +76,12 @@ public class FieldAccess implements Expression, AstNode {
     public Type getType() {
 	return type;
     }
+
+	public Definition getStruct() {
+		return struct;
+	}
+
+	public void setStruct(Definition struct) {
+		this.struct = struct;
+	}
 }

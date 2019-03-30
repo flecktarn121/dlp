@@ -37,6 +37,10 @@ public class FunctionDefinition implements AstNode, Definition {
 		return type;
 	}
 
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	@Override
 	public int getLine() {
 		return line;

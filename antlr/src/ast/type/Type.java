@@ -30,4 +30,6 @@ public interface Type extends AstNode {
 	boolean isNumber();
 	
 	boolean isRecord();
+	
+	boolean isError();
 }

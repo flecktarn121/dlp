@@ -47,5 +47,10 @@ public class ErrorType extends AbsractType {
 		
 		return NAME;
 	}
+	
+	@Override
+	public boolean isError() {
+		return true;
+	}
 
 }

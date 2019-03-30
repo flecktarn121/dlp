@@ -1,6 +1,5 @@
 package ast.type;
 
-import ast.AstNode;
 import visitor.Visitor;
 
 public class RecordType extends AbsractType {
@@ -9,6 +8,14 @@ public class RecordType extends AbsractType {
 	private int column;
 	private String fieldName;
 	private Type type;
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
 
 	public RecordType(String name, Type type) {
 		super();

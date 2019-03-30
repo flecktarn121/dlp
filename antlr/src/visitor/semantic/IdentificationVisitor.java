@@ -3,6 +3,7 @@ package visitor.semantic;
 import ast.definition.Definition;
 import ast.definition.FunctionDefinition;
 import ast.definition.VariableDefinition;
+import ast.expression.FieldAccess;
 import ast.expression.FunctionCall;
 import ast.expression.Variable;
 import ast.statement.Function;
@@ -73,5 +74,18 @@ public class IdentificationVisitor extends AbstractVisitor<Void, Void> {
 	super.visit(e, param);
 	return null;
     }
+
+	@Override
+	public Void visit(FieldAccess e, Void param) {
+		Definition originalDefinition = SymbolTable.getInstance().find(e.getRecordName());
+		if (originalDefinition == null) {
+		    ErrorHandler.getInstance()
+			    .addError(new ErrorType("Struct " + e.getRecordName() + " is undeclared", e.getLine(), e.getColumn()));
+		}
+		e.setStruct(originalDefinition);
+		super.visit(e, param);
+		
+		return null;
+	}
 
 }
