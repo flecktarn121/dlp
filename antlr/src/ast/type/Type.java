@@ -32,4 +32,6 @@ public interface Type extends AstNode {
 	boolean isRecord();
 	
 	boolean isError();
+	
+	boolean isArray();
 }

@@ -141,7 +141,7 @@ public abstract class AbstractVisitor<TP, TR> implements Visitor<TP, TR> {
 
 	@Override
 	public TR visit(ArrayType e, TP param) {
-		// TODO: change this once you figure out how to deal with the array type
+		e.getTypeOf().accept(this, param);
 		return null;
 	}
 

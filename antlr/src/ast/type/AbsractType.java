@@ -54,5 +54,10 @@ public abstract class AbsractType implements Type, AstNode {
 	public boolean isError() {
 		return false;
 	}
+	
+	@Override
+	public boolean isArray() {
+	    return false;
+	}
 
 }

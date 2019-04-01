@@ -25,7 +25,7 @@ type returns [Type ast]:
 		'int'{$ast = new IntType(0, 0);}
 	  |'char'{$ast = new CharType(0, 0);}
 	  |'double'{$ast = new RealType(0, 0);}
-	  |t1=type('['expr']')+{$ast=new ArrayType($t1.ast, $expr.ast);}
+	  |t1=type('['e1=expr']'){$ast=new ArrayType($t1.ast, $e1.ast);}('['e2=expr']' {((ArrayType)$ast).setTypeOf(new ArrayType($t1.ast, $e2.ast));})*
 	  |'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID ';'{fields.add(new RecordType($id1.text, $type.ast));})+ '}'{$ast = new StructType( fields);}
 	  ;
 	
