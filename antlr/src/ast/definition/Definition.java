@@ -17,4 +17,8 @@ public interface Definition extends Body {
 	public int getScope();
 
 	public void setScope(int scope);
+
+	public int getOffset();
+
+	public void setOffset(int offset);
 }

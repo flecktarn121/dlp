@@ -25,6 +25,15 @@ public interface Type extends AstNode {
 	 */
 	Type arithmetic(Type type);
 	
+	/**
+	 * Receives a type, and returns the result of performing an array access
+	 * 
+	 * @param type of the position of the access
+	 * @return the type of the resulting access, error if it is not correct
+	 */
+	Type arrayAccess(Type type);
+	
+	
 	boolean isComplex();
 	
 	boolean isNumber();
@@ -34,4 +43,6 @@ public interface Type extends AstNode {
 	boolean isError();
 	
 	boolean isArray();
+	
+	boolean isFunction();
 }

@@ -1289,7 +1289,7 @@ public class CmmParser extends Parser {
 						((ExprContext)_localctx).e2 = ((ExprContext)_localctx).expr = expr(0);
 						setState(342);
 						match(T__11);
-						 ((ExprContext)_localctx).ast =  new ArrayAccess(((ExprContext)_localctx).e2.ast, (((ExprContext)_localctx).e1!=null?(((ExprContext)_localctx).e1.start):null).getLine(), (((ExprContext)_localctx).e1!=null?(((ExprContext)_localctx).e1.start):null).getCharPositionInLine() +1); 
+						 ((ExprContext)_localctx).ast =  new ArrayAccess(((ExprContext)_localctx).e1.ast, ((ExprContext)_localctx).e2.ast, (((ExprContext)_localctx).e1!=null?(((ExprContext)_localctx).e1.start):null).getLine(), (((ExprContext)_localctx).e1!=null?(((ExprContext)_localctx).e1.start):null).getCharPositionInLine() +1); 
 						}
 						break;
 					}

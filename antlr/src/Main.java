@@ -24,7 +24,7 @@ public class Main {
 
 	// create a lexer that feeds off of input CharStream
 
-	CharStream input = CharStreams.fromFileName("input/input5-wrong.txt");
+	CharStream input = CharStreams.fromFileName("input/input(OLD).txt");
 	CmmLexer lexer = new CmmLexer(input);
 
 	// create a parser that feeds off the tokens buffer

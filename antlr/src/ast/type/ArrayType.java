@@ -10,12 +10,7 @@ public class ArrayType extends AbsractType {
     private int column;
 
     public ArrayType(Type typeOf, Expression size) {
-	if (typeOf.isArray()) {
-	    Expression oldSize = this.size;
-	    Type oldType = this.typeOf;
-	    ((ArrayType) typeOf).setSize(oldSize);
-	    ((ArrayType) typeOf).setTypeOf(oldType);
-	}
+	
 	this.typeOf = typeOf;
 	this.size = size;
     }

@@ -14,6 +14,7 @@ public class FunctionDefinition implements AstNode, Definition {
 	private int column;
 	private List<Body> body;
 	private int scope;
+	private int offset;
 
 	public FunctionDefinition(String name, Type type, List<Body> body) {
 		this.name = name;
@@ -78,6 +79,18 @@ public class FunctionDefinition implements AstNode, Definition {
 	@Override
 	public void setScope(int scope) {
 		this.scope = scope;
+		
+	}
+
+	@Override
+	public int getOffset() {
+		
+		return offset;
+	}
+
+	@Override
+	public void setOffset(int offset) {
+		this.offset=offset;
 		
 	}
 

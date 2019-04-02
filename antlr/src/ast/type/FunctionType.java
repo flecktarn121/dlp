@@ -67,4 +67,9 @@ public class FunctionType extends AbsractType{
 		
 		return "Function";
 	}
+	
+	@Override
+	public boolean isFunction() {
+	    return true;
+	}
 }

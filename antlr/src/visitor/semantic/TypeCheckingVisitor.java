@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import ast.Program;
 import ast.definition.FunctionDefinition;
 import ast.definition.VariableDefinition;
 import ast.expression.ArrayAccess;
@@ -67,7 +68,10 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Void> {
 
 	@Override
 	public Void visit(ArrayAccess e, Type param) {
-	    	e.
+//		if(e.getArray().getType().arrayAccess(e.getPosition().getType())) {
+//			
+//		}
+		//return null;
 		throw new UnsupportedOperationException("perro arregla el arrayacess");
 		// return super.visit(e, param);
 	}
@@ -188,7 +192,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Void> {
 		return null;
 	}
 
-//***********STATEMENTS***********
+	// ***********STATEMENTS***********
 
 	@Override
 	public Void visit(Return e, Type param) {
@@ -334,8 +338,17 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Void> {
 
 		return null;
 	}
-	
-	
+
+	@Override
+	public Void visit(Program e, Type param) {
+		super.visit(e, param);
+		if (!e.getDefinitions().stream().filter((def) -> def.getType().isFunction())
+				.anyMatch((def) -> def.getName().equals("main"))) {
+			ErrorHandler.getInstance().addError(new ErrorType("Missing main function in the program."));
+		}
+
+		return null;
+	}
 
 	// TODO: set the type of all the expressions
 	// TODO: to th visit method of the return , you need to pass the function

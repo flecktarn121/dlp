@@ -49,7 +49,7 @@ expr returns [Expression ast]:
 			|REAL_CONSTANT { $ast = new RealLiteral(Double.parseDouble($REAL_CONSTANT.text), $REAL_CONSTANT.getLine(), $REAL_CONSTANT.getCharPositionInLine() +1); }
 			|CHAR_CONSTANT {$ast = new CharacterLiteral(LexerHelper.lexemeToChar($CHAR_CONSTANT.text), $CHAR_CONSTANT.getLine(), $CHAR_CONSTANT.getCharPositionInLine() +1);}
 			|INT_CONSTANT { $ast = new IntegerLiteral(Integer.parseInt($INT_CONSTANT.text), $INT_CONSTANT.getLine(), $INT_CONSTANT.getCharPositionInLine() +1); }
-			|e1=expr '[' e2=expr ']' { $ast = new ArrayAccess($e2.ast, $e1.start.getLine(), $e1.start.getCharPositionInLine() +1); } //array access 
+			|e1=expr '[' e2=expr ']' { $ast = new ArrayAccess($e1.ast, $e2.ast, $e1.start.getLine(), $e1.start.getCharPositionInLine() +1); } //array access 
 			|ID '('{ List<Expression> params = new ArrayList<Expression>(); }(e1=expr {params.add($e1.ast); } (',' e2=expr {params.add($e2.ast); })*)? ')' { $ast = new FunctionCall(new Variable($ID.text),params); }//function acess
 			|id1=ID'.'id2=ID { $ast = new FieldAccess($id2.text,$id1.text, $id1.getLine(), $id1.getCharPositionInLine() + 1); }
 			|'('type')' expr {$ast = new Cast($type.ast, $expr.ast, $expr.start.getLine(), $expr.start.getCharPositionInLine() + 1); } //cast			

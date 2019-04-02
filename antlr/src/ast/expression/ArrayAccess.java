@@ -6,16 +6,18 @@ import visitor.Visitor;
 
 public class ArrayAccess implements Expression, AstNode {
 	private Expression position;
+	private Expression array;
 	private int line;
 	private int column;
 	private Type type;
 
-	public ArrayAccess(Expression position) {
+	public ArrayAccess(Expression array, Expression position) {
 		this.position = position;
+		this.setArray(array);
 	}
 
-	public ArrayAccess(Expression position, int line, int column) {
-		this(position);
+	public ArrayAccess(Expression array, Expression position, int line, int column) {
+		this(array, position);
 		this.line = line;
 		this.column = column;
 	}
@@ -53,15 +55,23 @@ public class ArrayAccess implements Expression, AstNode {
 	public boolean isLValue() {
 		return true;
 	}
-	
+
 	@Override
 	public void setType(Type type) {
 		this.type = type;
-		
+
 	}
 
 	@Override
 	public Type getType() {
 		return type;
+	}
+
+	public Expression getArray() {
+		return array;
+	}
+
+	public void setArray(Expression array) {
+		this.array = array;
 	}
 }

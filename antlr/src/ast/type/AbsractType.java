@@ -41,6 +41,14 @@ public abstract class AbsractType implements Type, AstNode {
 	}
 
 	@Override
+	public Type arrayAccess(Type type) {
+
+		return new ErrorType(
+				"Cannot perform an array acces to a " + getName() + " with operand of type  " + type.getName(),
+				getLine(), getColumn());
+	}
+
+	@Override
 	public boolean isComplex() {
 		return true;
 	}
@@ -54,10 +62,15 @@ public abstract class AbsractType implements Type, AstNode {
 	public boolean isError() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isArray() {
-	    return false;
+		return false;
+	}
+
+	@Override
+	public boolean isFunction() {
+		return false;
 	}
 
 }
