@@ -16,6 +16,11 @@ public interface Type extends AstNode {
 	 */
 	boolean isLogical();
 	
+	/**
+	 * Get the name of the type
+	 * 
+	 * @return
+	 */
 	String getName();
 	
 	/**
@@ -33,16 +38,39 @@ public interface Type extends AstNode {
 	 */
 	Type arrayAccess(Type type);
 	
-	
+	/**
+	 * Whether a type is complex (struct, funcion...) or not
+	 * @return
+	 */
 	boolean isComplex();
 	
+	/**
+	 * Whether a type is a numer (integer, real...) or not
+	 * @return
+	 */
 	boolean isNumber();
 	
+	/**
+	 * Whether a type is a record (struct) or not
+	 * @return
+	 */
 	boolean isRecord();
 	
+	/**
+	 * Whether a type is an error 
+	 * @return
+	 */
 	boolean isError();
 	
+	/**
+	 * Whether a type is an array 
+	 * @return
+	 */
 	boolean isArray();
 	
+	/**
+	 * Whether a type is a function 
+	 * @return
+	 */
 	boolean isFunction();
 }
