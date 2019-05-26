@@ -72,5 +72,10 @@ public abstract class AbsractType implements Type, AstNode {
 	public boolean isFunction() {
 		return false;
 	}
+	
+	@Override
+	public int getSizeBytes() {
+		return 0;
+	}
 
 }

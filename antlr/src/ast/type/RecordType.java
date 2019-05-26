@@ -63,5 +63,10 @@ public class RecordType extends AbsractType {
 	public void setFieldName(String fieldName) {
 	    this.fieldName = fieldName;
 	}
+	
+	@Override
+	public int getSizeBytes() {
+		return type.getSizeBytes();
+	}
 
 }

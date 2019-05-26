@@ -1,9 +1,9 @@
 package ast.type;
 
-import ast.AstNode;
 import visitor.Visitor;
 
 public class VoidType extends AbsractType {
+	private static final int SIZE = 0;
 	private int line;
 	private int column;
 
@@ -46,6 +46,11 @@ public class VoidType extends AbsractType {
 	@Override
 	public boolean isComplex() {
 		return false;
+	}
+	
+	@Override
+	public int getSizeBytes() {
+		return SIZE;
 	}
 
 }

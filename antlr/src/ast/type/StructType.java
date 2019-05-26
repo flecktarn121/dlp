@@ -2,7 +2,6 @@ package ast.type;
 
 import java.util.List;
 
-import ast.AstNode;
 import visitor.Visitor;
 
 public class StructType extends AbsractType {
@@ -61,6 +60,11 @@ public class StructType extends AbsractType {
 
 	public void setFields(List<RecordType> fields) {
 	    this.fields = fields;
+	}
+	
+	@Override
+	public int getSizeBytes() {
+		return this.fields.stream().mapToInt(field -> field.getSizeBytes()).sum();
 	}
 	
 

@@ -73,4 +73,11 @@ public interface Type extends AstNode {
 	 * @return
 	 */
 	boolean isFunction();
+	
+	/**
+	 * Return the size in bytes of the type
+	 * 
+	 * @return
+	 */
+	int getSizeBytes();
 }

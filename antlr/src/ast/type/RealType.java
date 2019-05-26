@@ -1,9 +1,11 @@
 package ast.type;
 
 import ast.AstNode;
+import ast.expression.literal.IntegerLiteral;
 import visitor.Visitor;
 
 public class RealType extends AbsractType {
+	private static final int SIZE = 4;
 	public static final String NAME = "Real";
 	private int line;
 	private int column;
@@ -65,5 +67,10 @@ public class RealType extends AbsractType {
 	@Override
 	public boolean isNumber() {
 		return true;
+	}
+	
+	@Override
+	public int getSizeBytes() {
+		return SIZE;
 	}
 }

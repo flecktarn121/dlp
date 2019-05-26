@@ -68,12 +68,8 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Void> {
 
 	@Override
 	public Void visit(ArrayAccess e, Type param) {
-//		if(e.getArray().getType().arrayAccess(e.getPosition().getType())) {
-//			
-//		}
-		//return null;
-		throw new UnsupportedOperationException("perro arregla el arrayacess");
-		// return super.visit(e, param);
+		
+		return null;
 	}
 
 	@Override

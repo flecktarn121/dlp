@@ -3,6 +3,7 @@ package ast.type;
 import visitor.Visitor;
 
 public class CharType extends AbsractType {
+	private static final int SIZE = 1;
 	private int line;
 	private int column;
 
@@ -51,5 +52,10 @@ public class CharType extends AbsractType {
 	@Override
 	public boolean isComplex() {
 		return false;
+	}
+	
+	@Override
+	public int getSizeBytes() {
+		return SIZE;
 	}
 }

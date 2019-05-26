@@ -6,7 +6,7 @@ import java.util.List;
 import ast.definition.VariableDefinition;
 import visitor.Visitor;
 
-public class FunctionType extends AbsractType{
+public class FunctionType extends AbsractType {
 	private Type returnType;
 	private List<VariableDefinition> paramType;
 	private int line;
@@ -64,12 +64,21 @@ public class FunctionType extends AbsractType{
 
 	@Override
 	public String getName() {
-		
+
 		return "Function";
 	}
-	
+
 	@Override
 	public boolean isFunction() {
-	    return true;
+		return true;
+	}
+
+	@Override
+	public int getSizeBytes() {
+		int sizeReturnType = this.returnType.getSizeBytes();
+		int sizeParams = paramType.stream().mapToInt(param -> param.getType().getSizeBytes()).sum();
+		int localVarsSize = 0;
+
+		return localVarsSize + sizeParams + sizeReturnType;
 	}
 }
