@@ -20,12 +20,11 @@ public class StructType extends AbsractType {
 		this.line = line;
 		this.column = column;
 	}
-	
 
-	    @Override
-	    public boolean isRecord() {
+	@Override
+	public boolean isRecord() {
 		return true;
-	    }
+	}
 
 	@Override
 	public int getLine() {
@@ -50,23 +49,44 @@ public class StructType extends AbsractType {
 
 	@Override
 	public String getName() {
-		
+
 		return "Struct";
 	}
 
 	public List<RecordType> getFields() {
-	    return fields;
+		return fields;
 	}
 
 	public void setFields(List<RecordType> fields) {
-	    this.fields = fields;
+		this.fields = fields;
 	}
-	
+
 	@Override
 	public int getSizeBytes() {
 		return this.fields.stream().mapToInt(field -> field.getSizeBytes()).sum();
 	}
-	
 
+	public int getOffsetForField(String fieldName) {
+		int offset = 0;
+
+		for (int i = 0; i < fields.size(); i++) {
+			if (fields.get(i).getFieldName().equals(fieldName)) {
+				return offset;
+			}
+			offset += fields.get(i).getSizeBytes();
+		}
+
+		throw new IllegalArgumentException("No field with name " + fieldName);
+	}
+
+	public RecordType getField(String fieldName) {
+		for (int i = 0; i < fields.size(); i++) {
+			if (fields.get(i).getFieldName().equals(fieldName)) {
+				return fields.get(i);
+			}
+		}
+
+		throw new IllegalArgumentException("No field with name " + fieldName);
+	}
 
 }

@@ -61,6 +61,7 @@ public abstract class AbstractVisitor<TP, TR> implements Visitor<TP, TR> {
 
 	@Override
 	public TR visit(ArrayAccess e, TP param) {
+		e.getArray().accept(this, param);
 		e.getPosition().accept(this, param);
 		return null;
 	}
@@ -73,12 +74,14 @@ public abstract class AbstractVisitor<TP, TR> implements Visitor<TP, TR> {
 
 	@Override
 	public TR visit(Cast e, TP param) {
+		e.getOperand().accept(this, param);
 		e.getType().accept(this, param);
 		return null;
 	}
 
 	@Override
 	public TR visit(FieldAccess e, TP param) {
+		e.getRecordName().accept(this, param);
 		return null;
 	}
 

@@ -3,6 +3,7 @@ package ast.type;
 import visitor.Visitor;
 
 public class VoidType extends AbsractType {
+	public static final String NAME = "Void";
 	private static final int SIZE = 0;
 	private int line;
 	private int column;
@@ -40,7 +41,7 @@ public class VoidType extends AbsractType {
 	@Override
 	public String getName() {
 		
-		return "Void";
+		return NAME;
 	}
 	
 	@Override

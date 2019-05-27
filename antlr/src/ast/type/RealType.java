@@ -1,7 +1,5 @@
 package ast.type;
 
-import ast.AstNode;
-import ast.expression.literal.IntegerLiteral;
 import visitor.Visitor;
 
 public class RealType extends AbsractType {

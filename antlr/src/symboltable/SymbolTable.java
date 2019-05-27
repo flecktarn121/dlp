@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import ast.definition.Definition;
 
 public class SymbolTable {
 
-	private int scope = 0;
+	public static final int GLOBAL_SCOPE = 0;
+	private int scope = GLOBAL_SCOPE;
 	private List<Map<String, Definition>> table;
 	private static SymbolTable instance = new SymbolTable();
 

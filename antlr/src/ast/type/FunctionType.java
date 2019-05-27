@@ -11,6 +11,7 @@ public class FunctionType extends AbsractType {
 	private List<VariableDefinition> paramType;
 	private int line;
 	private int column;
+	private int localVarsSize = 0;
 
 	public FunctionType(Type returnType, List<VariableDefinition> paramType) {
 		super();
@@ -76,9 +77,21 @@ public class FunctionType extends AbsractType {
 	@Override
 	public int getSizeBytes() {
 		int sizeReturnType = this.returnType.getSizeBytes();
-		int sizeParams = paramType.stream().mapToInt(param -> param.getType().getSizeBytes()).sum();
-		int localVarsSize = 0;
+		int sizeParams = getSizeParams();
 
 		return localVarsSize + sizeParams + sizeReturnType;
 	}
+
+	public int getLocalVarsSize() {
+		return localVarsSize;
+	}
+
+	public int getSizeParams() {
+		return paramType.stream().mapToInt(param -> param.getType().getSizeBytes()).sum();
+	}
+
+	public void setLocalVarsSize(int localVarsSize) {
+		this.localVarsSize = localVarsSize;
+	}
+
 }

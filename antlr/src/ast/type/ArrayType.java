@@ -5,6 +5,7 @@ import ast.expression.literal.IntegerLiteral;
 import visitor.Visitor;
 
 public class ArrayType extends AbsractType {
+	public static final String NAME = "array type";
 	private Type typeOf;
 	private Expression size;
 	private int line;
@@ -68,7 +69,7 @@ public class ArrayType extends AbsractType {
 	@Override
 	public String getName() {
 
-		return "array type";
+		return NAME;
 	}
 
 	@Override
@@ -87,21 +88,6 @@ public class ArrayType extends AbsractType {
 			// if it is an error, we do not care
 			return type;
 		}
-		if (type.isArray()) {
-			ArrayType arrayType = (ArrayType) type;
-			// if it is an array, check that the type they contain is the same
-			if (!this.typeOf.getName().equals(arrayType.typeOf.getName())) {
-				return new ErrorType("Type mismatch on the array access", this.getLine(), this.getColumn());
-			} else {
-				// if it is the same, check whether we need to recursively check more arrays or
-				// we are done
-				if (this.typeOf.isArray()) {
-					this.typeOf.arrayAccess(arrayType.typeOf);
-				} else {
-					return this.typeOf;
-				}
-			}
-		}
-		return new ErrorType("Cannot perform an array access over " + type.getName(), this.getLine(), this.getColumn());
+		return this.typeOf;
 	}
 }

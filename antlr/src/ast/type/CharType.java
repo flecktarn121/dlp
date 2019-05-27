@@ -3,6 +3,7 @@ package ast.type;
 import visitor.Visitor;
 
 public class CharType extends AbsractType {
+	public static final String NAME = "character";
 	private static final int SIZE = 1;
 	private int line;
 	private int column;
@@ -40,7 +41,7 @@ public class CharType extends AbsractType {
 	@Override
 	public String getName() {
 		
-		return "character";
+		return NAME;
 	}
 
 	@Override

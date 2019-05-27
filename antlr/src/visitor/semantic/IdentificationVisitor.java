@@ -1,5 +1,6 @@
 package visitor.semantic;
 
+import ast.Program;
 import ast.definition.Definition;
 import ast.definition.FunctionDefinition;
 import ast.definition.VariableDefinition;
@@ -14,7 +15,18 @@ import visitor.AbstractVisitor;
 
 public class IdentificationVisitor extends AbstractVisitor<Void, Void> {
 
+	
+	
     @Override
+	public Void visit(Program e, Void param) {
+    	super.visit(e, param);
+    	if(SymbolTable.getInstance().find("main")== null) {
+    		ErrorHandler.getInstance().addError(new ErrorType("No main function defined."));
+    	}
+		return null;
+	}
+
+	@Override
     public Void visit(FunctionDefinition e, Void param) {
 	if (!SymbolTable.getInstance().insert(e)) {
 	    ErrorHandler.getInstance().addError(new ErrorType(
@@ -77,10 +89,10 @@ public class IdentificationVisitor extends AbstractVisitor<Void, Void> {
 
 	@Override
 	public Void visit(FieldAccess e, Void param) {
-		Definition originalDefinition = SymbolTable.getInstance().find(e.getRecordName());
+		Definition originalDefinition = SymbolTable.getInstance().find(e.getRecordName().getName());
 		if (originalDefinition == null) {
 		    ErrorHandler.getInstance()
-			    .addError(new ErrorType("Struct " + e.getRecordName() + " is undeclared", e.getLine(), e.getColumn()));
+			    .addError(new ErrorType("Struct " + e.getRecordName().getName() + " is undeclared", e.getLine(), e.getColumn()));
 		}
 		e.setStruct(originalDefinition);
 		super.visit(e, param);

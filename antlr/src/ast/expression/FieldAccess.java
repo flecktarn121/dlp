@@ -11,24 +11,24 @@ public class FieldAccess implements Expression, AstNode {
     private String fieldName;
     private Type type;
     private Definition struct;
-    private String recordName;
+    private Variable recordName;
 
-    public FieldAccess(String fieldName, String recordName) {
+    public FieldAccess(Variable recordName, String fieldName) {
 		this.fieldName = fieldName;
 		this.recordName = recordName;
 	}
 
-    public FieldAccess(String fieldName, String recordName, int line, int column) {
-	this(fieldName, recordName);
+    public FieldAccess(Variable recordName, String fieldName, int line, int column) {
+	this(recordName, fieldName);
 	this.line = line;
 	this.column = column;
     }
 
-    public String getRecordName() {
+    public Variable getRecordName() {
         return recordName;
     }
 
-    public void setRecordName(String recordName) {
+    public void setRecordName(Variable recordName) {
         this.recordName = recordName;
     }
 

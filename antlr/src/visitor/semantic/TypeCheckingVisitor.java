@@ -68,7 +68,8 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Void> {
 
 	@Override
 	public Void visit(ArrayAccess e, Type param) {
-		
+		super.visit(e, param);
+		e.setType(e.getArray().getType().arrayAccess(e.getPosition().getType()));
 		return null;
 	}
 
@@ -345,9 +346,5 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Void> {
 
 		return null;
 	}
-
-	// TODO: set the type of all the expressions
-	// TODO: to th visit method of the return , you need to pass the function
-	// definiion, in oder to
 
 }

@@ -26,7 +26,7 @@ type returns [Type ast]:
 	  |'char'{$ast = new CharType(0, 0);}
 	  |'double'{$ast = new RealType(0, 0);}
 	  |t1=type('['e1=expr']'){$ast=new ArrayType($t1.ast, $e1.ast);}('['e2=expr']' {((ArrayType)$ast).setTypeOf(new ArrayType($t1.ast, $e2.ast));})*
-	  |'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID ';'{fields.add(new RecordType($id1.text, $type.ast));})+ '}'{$ast = new StructType( fields);}
+	  |'struct'{List<RecordType> fields = new ArrayList<RecordType>();}'{' (type id1=ID {fields.add(new RecordType($id1.text, $type.ast));} (',' id2=ID {fields.add(new RecordType($id2.text, $type.ast));})* ';')+ '}'{$ast = new StructType( fields);}
 	  ;
 	
 statement returns [Statement ast]:
@@ -46,12 +46,9 @@ block returns [List<Body> ast = new ArrayList<Body>()]:
 		
 expr returns [Expression ast]:
 			ID { $ast = new Variable($ID.text, $ID.getLine(), $ID.getCharPositionInLine() +1); }
-			|REAL_CONSTANT { $ast = new RealLiteral(Double.parseDouble($REAL_CONSTANT.text), $REAL_CONSTANT.getLine(), $REAL_CONSTANT.getCharPositionInLine() +1); }
-			|CHAR_CONSTANT {$ast = new CharacterLiteral(LexerHelper.lexemeToChar($CHAR_CONSTANT.text), $CHAR_CONSTANT.getLine(), $CHAR_CONSTANT.getCharPositionInLine() +1);}
-			|INT_CONSTANT { $ast = new IntegerLiteral(Integer.parseInt($INT_CONSTANT.text), $INT_CONSTANT.getLine(), $INT_CONSTANT.getCharPositionInLine() +1); }
 			|e1=expr '[' e2=expr ']' { $ast = new ArrayAccess($e1.ast, $e2.ast, $e1.start.getLine(), $e1.start.getCharPositionInLine() +1); } //array access 
 			|ID '('{ List<Expression> params = new ArrayList<Expression>(); }(e1=expr {params.add($e1.ast); } (',' e2=expr {params.add($e2.ast); })*)? ')' { $ast = new FunctionCall(new Variable($ID.text),params); }//function acess
-			|id1=ID'.'id2=ID { $ast = new FieldAccess($id2.text,$id1.text, $id1.getLine(), $id1.getCharPositionInLine() + 1); }
+			|id1=ID'.'id2=ID { $ast = new FieldAccess(new Variable($id1.text),$id2.text, $id1.getLine(), $id1.getCharPositionInLine() + 1); }
 			|'('type')' expr {$ast = new Cast($type.ast, $expr.ast, $expr.start.getLine(), $expr.start.getCharPositionInLine() + 1); } //cast			
 			| '(' expr ')' {$ast = $expr.ast;}
 			|e1=expr { String operand = ""; }  ('*' { operand = "*"; } |'/' { operand = "/"; }|'%' { operand = "%"; }) e2=expr { $ast = new BinaryOperation(operand, $e1.ast, $e2.ast, $e1.start.getLine(), $e1.start.getCharPositionInLine() +1); }//arithmetic operation
@@ -61,6 +58,9 @@ expr returns [Expression ast]:
 			|'!' expr { $ast = new BooleanNegation($expr.ast, $expr.start.getLine(), $expr.start.getCharPositionInLine() + 1 );} //boolean negation
 			|'-' expr { $ast = new UnaryMinus($expr.ast, $expr.start.getLine(), $expr.start.getCharPositionInLine() + 1 );}//unary minus
 			|ID { $ast = new Variable($ID.text, $ID.getLine(), $ID.getCharPositionInLine() +1); }
+			|REAL_CONSTANT { $ast = new RealLiteral(Double.parseDouble($REAL_CONSTANT.text), $REAL_CONSTANT.getLine(), $REAL_CONSTANT.getCharPositionInLine() +1); }
+			|CHAR_CONSTANT {$ast = new CharacterLiteral(LexerHelper.lexemeToChar($CHAR_CONSTANT.text), $CHAR_CONSTANT.getLine(), $CHAR_CONSTANT.getCharPositionInLine() +1);}
+			|INT_CONSTANT { $ast = new IntegerLiteral(Integer.parseInt($INT_CONSTANT.text), $INT_CONSTANT.getLine(), $INT_CONSTANT.getCharPositionInLine() +1); }
 			;
 			
 

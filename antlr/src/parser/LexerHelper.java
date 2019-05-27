@@ -18,12 +18,17 @@ public class LexerHelper {
 				return (char) Character.getNumericValue(Integer.parseInt(text.substring(2, text.length()-1)));
 			}
 			else {
-				char result = (char) ('\\' + chars[2]);
+				char result;
+				if(chars[2] == 'n') {
+					result = '\n';
+				}else {
+					result = '\t';
+				}
 				return result;
 			}
 		}
 		else {
-			return chars[2];
+			return chars[1];
 		}
 	}
 
