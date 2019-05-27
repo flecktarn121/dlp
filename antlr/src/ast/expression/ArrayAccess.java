@@ -10,6 +10,7 @@ public class ArrayAccess implements Expression, AstNode {
 	private int line;
 	private int column;
 	private Type type;
+	private String code;
 
 	public ArrayAccess(Expression array, Expression position) {
 		this.position = position;
@@ -73,5 +74,16 @@ public class ArrayAccess implements Expression, AstNode {
 
 	public void setArray(Expression array) {
 		this.array = array;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

@@ -7,6 +7,13 @@ import java.util.Map;
 
 import ast.definition.Definition;
 
+/**
+ * Class to represent the symbol table of the compiler, that is, the data
+ * structure used to store the identifiers of definitions
+ * 
+ * @author Ángel García Menéndez
+ *
+ */
 public class SymbolTable {
 
 	public static final int GLOBAL_SCOPE = 0;
@@ -18,16 +25,28 @@ public class SymbolTable {
 		table = new ArrayList<Map<String, Definition>>();
 		table.add(new HashMap<String, Definition>());
 	}
-	
+
+	/**
+	 * The instance of the current symbol table
+	 * 
+	 * @return
+	 */
 	public static SymbolTable getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Increment the scope one level. This should be called every time we enter a
+	 * function.
+	 */
 	public void set() {
 		++scope;
 		table.add(new HashMap<String, Definition>());
 	}
 
+	/**
+	 * Return to the previous scope. SHould be called when leaving fucntions
+	 */
 	public void reset() {
 		table.remove(scope);
 		--scope;
@@ -66,6 +85,11 @@ public class SymbolTable {
 		return definition;
 	}
 
+	/**
+	 * Search for a definition only in the current scope
+	 * @param id
+	 * @return
+	 */
 	public Definition findInCurrentScope(String id) {
 		return table.get(scope).get(id);
 	}

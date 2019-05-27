@@ -11,6 +11,7 @@ public class Read implements AstNode, Statement {
 	private int line;
 	private int column;
 	private List<Expression> arguments;
+	private String code;
 
 	public Read(List<Expression> arguments) {
 		this.arguments = arguments;
@@ -48,5 +49,16 @@ public class Read implements AstNode, Statement {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

@@ -40,6 +40,14 @@ import ast.type.VoidType;
 import parser.ErrorHandler;
 import visitor.AbstractVisitor;
 
+/**
+ * This visitor performs the type check. The Type interface should have methods
+ * with the operations, and the implementation of the types would know whether
+ * that operation can be applied to them, and with which other types.
+ * 
+ * @author Ángel García Menéndez
+ *
+ */
 public class TypeCheckingVisitor extends AbstractVisitor<Type, Void> {
 
 	@Override

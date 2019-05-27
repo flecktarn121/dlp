@@ -6,5 +6,7 @@ package ast;
  *
  */
 public interface Body extends AstNode {
+	void setCode(String string);
 
+	String getCode();
 }

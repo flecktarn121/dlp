@@ -13,6 +13,7 @@ public class Function implements AstNode, Statement {
 	private int line;
 	private Variable name;
 	private List<Expression> parameters;
+	private String code;
 
 	public Function(Variable name, List<Expression> params) {
 		this.setName(name);
@@ -61,5 +62,16 @@ public class Function implements AstNode, Statement {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

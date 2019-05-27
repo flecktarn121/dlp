@@ -12,6 +12,7 @@ public class FieldAccess implements Expression, AstNode {
     private Type type;
     private Definition struct;
     private Variable recordName;
+	private String code;
 
     public FieldAccess(Variable recordName, String fieldName) {
 		this.fieldName = fieldName;
@@ -83,5 +84,16 @@ public class FieldAccess implements Expression, AstNode {
 
 	public void setStruct(Definition struct) {
 		this.struct = struct;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

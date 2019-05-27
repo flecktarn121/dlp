@@ -6,19 +6,27 @@ import ast.type.FunctionType;
 import symboltable.SymbolTable;
 import visitor.AbstractVisitor;
 
+/**
+ * Establishes the offsets of variables, which is the distance in bytes from the
+ * start of the address space reserved for them.
+ * (in the strucut fields, the struct type takes care of it.
+ * 
+ * @author Ángel García Menéndez
+ *
+ */
 public class OffsetVisitor extends AbstractVisitor<Boolean, Void> {
-	
+
 	private int golbalVarsSize = 0;
 	private int localVarsSize = 0;
 	private int paramSize = 0;
-		
+
 	@Override
 	public Void visit(FunctionDefinition e, Boolean isParameter) {
 		localVarsSize = 0;
 		paramSize = 4;
-		//we set the offset of the variable definitions that serve as parameters
+		// we set the offset of the variable definitions that serve as parameters
 		e.getType().accept(this, true);
-		//now the rest
+		// now the rest
 		e.getBody().forEach(element -> element.accept(this, false));
 		((FunctionType) e.getType()).setLocalVarsSize(localVarsSize);
 		return null;
@@ -27,22 +35,19 @@ public class OffsetVisitor extends AbstractVisitor<Boolean, Void> {
 	@Override
 	public Void visit(VariableDefinition e, Boolean isParameter) {
 		super.visit(e, isParameter);
-		if(e.getScope() == SymbolTable.GLOBAL_SCOPE) {
+		if (e.getScope() == SymbolTable.GLOBAL_SCOPE) {
 			e.setOffset(golbalVarsSize);
 			golbalVarsSize += e.getType().getSizeBytes();
-		}else {
-			if(isParameter) {
+		} else {
+			if (isParameter) {
 				e.setOffset(paramSize);
 				paramSize += e.getType().getSizeBytes();
-			}else {
+			} else {
 				localVarsSize += e.getType().getSizeBytes();
 				e.setOffset(-localVarsSize);
 			}
 		}
 		return null;
 	}
-	
-	
-	
 
 }

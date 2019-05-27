@@ -13,6 +13,7 @@ public class While implements AstNode, Statement {
 	private int column;
 	private Expression condition;
 	private List<Body> body;
+	private String code;
 
 	public While(Expression condition, List<Body> body) {
 		this.condition = condition;
@@ -60,5 +61,16 @@ public class While implements AstNode, Statement {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

@@ -9,6 +9,7 @@ public class Return implements AstNode, Statement {
 	private int line;
 	private int column;
 	private Expression value;
+	private String code;
 
 	public Return(Expression value) {
 		this.value = value;
@@ -43,6 +44,17 @@ public class Return implements AstNode, Statement {
 	
 	public Expression getValue() {
 		return value;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 
 }

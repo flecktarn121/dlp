@@ -41,6 +41,12 @@ public class CodeGenUtils {
 		suffixes.put(IntType.NAME, "i");
 	}
 
+	/**
+	 * Given a valid type name, returns its corresponding MAPL suffix.
+	 * 
+	 * @param typeName
+	 * @return MAPL suffix
+	 */
 	public String toSuffix(String typeName) {
 		if (!suffixes.containsKey(typeName)) {
 			throw new IllegalArgumentException("The type " + typeName + " does not have a suffix");
@@ -48,6 +54,12 @@ public class CodeGenUtils {
 		return suffixes.get(typeName);
 	}
 
+	/**
+	 * Given an operation in C--, returns its equivalent in MAPL
+	 * 
+	 * @param operation in C--
+	 * @return the operation in MAPL
+	 */
 	public String getOperator(String operation) {
 		if (!operators.containsKey(operation)) {
 			throw new IllegalArgumentException("The operation " + operation + " is not present in MAPL");

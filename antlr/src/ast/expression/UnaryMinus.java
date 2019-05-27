@@ -10,6 +10,7 @@ public class UnaryMinus implements AstNode, Expression {
 	private int line;
 	private int column;
 	private Type type;
+	private String code;
 
 	public UnaryMinus(Expression operand) {
 		this.operand = operand;
@@ -65,6 +66,17 @@ public class UnaryMinus implements AstNode, Expression {
 	@Override
 	public Type getType() {
 		return type;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 	
 

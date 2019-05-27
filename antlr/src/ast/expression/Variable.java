@@ -11,6 +11,7 @@ public class Variable implements Expression, AstNode {
 	private int column;
 	private Definition definition;
 	private Type type;
+	private String code;
 
 	public Variable(String name) {
 		this.name = name;
@@ -73,6 +74,17 @@ public class Variable implements Expression, AstNode {
 	@Override
 	public Type getType() {
 		return type;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 	
 	

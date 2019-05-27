@@ -9,5 +9,14 @@ import ast.Body;
  *
  */
 public interface Statement extends Body {
+	/**
+	 * Set the MAPL code for the current statement
+	 * @param string
+	 */
+	void setCode(String string);
 
+	/**
+	 * The MAPL code for the current statement
+	 */
+	String getCode();
 }

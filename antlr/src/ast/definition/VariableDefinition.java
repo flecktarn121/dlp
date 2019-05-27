@@ -53,6 +53,7 @@ public class VariableDefinition implements Definition, AstNode {
 	private int column;
 	private int scope;
 	private int offset;
+	private String code;
 
 	@Override
 	public String getName() {
@@ -106,5 +107,16 @@ public class VariableDefinition implements Definition, AstNode {
 	public void setOffset(int offset) {
 		this.offset=offset;
 		
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

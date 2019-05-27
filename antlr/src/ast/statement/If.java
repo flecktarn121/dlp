@@ -14,6 +14,7 @@ public class If implements AstNode, Statement {
 	private Expression condition;
 	private List<Body> thenBody;
 	private List<Body> elseBody;
+	private String code;
 
 	public If(Expression condition, List<Body> thenBody, List<Body> elseBody) {
 		this.condition = condition;
@@ -70,5 +71,16 @@ public class If implements AstNode, Statement {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

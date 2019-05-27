@@ -9,6 +9,7 @@ public class VoidLiteral implements Expression, AstNode {
 	private int line;
 	private int column;
 	private Type type;
+	private String code;
 
 	public VoidLiteral(int line, int column) {
 		this.line = line;
@@ -51,5 +52,16 @@ public class VoidLiteral implements Expression, AstNode {
 	@Override
 	public Type getType() {
 		return type;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

@@ -12,6 +12,7 @@ public class BinaryOperation implements AstNode, Expression {
 	private Expression left;
 	private Expression right;
 	private Type type;
+	private String code;
 
 	public BinaryOperation(String operation, Expression left, Expression right) {
 		this.operation = operation;
@@ -86,5 +87,16 @@ public class BinaryOperation implements AstNode, Expression {
 	@Override
 	public Type getType() {
 		return type;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

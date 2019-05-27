@@ -10,6 +10,7 @@ public class IntegerLiteral implements Expression, AstNode {
 	private int line;
 	private int column;
 	private Type type;
+	private String code;
 
 	public IntegerLiteral(int value) {
 		this.value = value;
@@ -65,5 +66,16 @@ public class IntegerLiteral implements Expression, AstNode {
 	@Override
 	public Type getType() {
 		return type;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }

@@ -12,7 +12,11 @@ import ast.type.ErrorType;
 import parser.ErrorHandler;
 import symboltable.SymbolTable;
 import visitor.AbstractVisitor;
-
+/**
+ * This visitor is intended to link the variables and function calls to its definitions
+ * @author Ángel García Menéndez
+ *
+ */
 public class IdentificationVisitor extends AbstractVisitor<Void, Void> {
 
 	

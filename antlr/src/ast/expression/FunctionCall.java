@@ -20,6 +20,7 @@ public class FunctionCall implements Expression, AstNode {
 
 	private List<Expression> parameters;
 	private Type type;
+	private String code;
 
 	public FunctionCall(Variable name, List<Expression> params) {
 		this.name = name;
@@ -72,6 +73,17 @@ public class FunctionCall implements Expression, AstNode {
 	@Override
 	public Type getType() {
 		return type;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 	
 	

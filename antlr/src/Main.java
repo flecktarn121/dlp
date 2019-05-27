@@ -14,8 +14,11 @@ import parser.CmmLexer;
 import parser.CmmParser;
 import parser.ErrorHandler;
 import visitor.Visitor;
+import visitor.codegen.AddressCGVisitor;
 import visitor.codegen.CodeGenerationVisitor;
+import visitor.codegen.ExecuteCGVisitor;
 import visitor.codegen.OffsetVisitor;
+import visitor.codegen.ValueCGVisitor;
 import visitor.semantic.IdentificationVisitor;
 import visitor.semantic.LValueVisitor;
 import visitor.semantic.TypeCheckingVisitor;
@@ -75,11 +78,18 @@ public class Main {
 		System.out.println("============ Code gen ============");
 		ast.accept(new OffsetVisitor(), false);
 		StringBuilder out = new StringBuilder();
-		ast.accept(new CodeGenerationVisitor("input.txt", out), false);
+		AddressCGVisitor address = new AddressCGVisitor();
+		ValueCGVisitor value = new ValueCGVisitor();
+		ExecuteCGVisitor execute = new ExecuteCGVisitor("input.txt");
+		address.setValueVisitor(value);
+		value.setAddressVisitor(address);
+		execute.setAddressVisitor(address);
+		execute.setValueVisitor(value);
+		ast.accept(execute, null);
 		if (!ErrorHandler.getInstance().anyError()) {
 			System.out.println("The code has been generated.");
-			BufferedWriter outputFile = new BufferedWriter(new FileWriter(new File("output.txt")));
-			outputFile.write(out.toString());
+			BufferedWriter outputFile = new BufferedWriter(new FileWriter(new File("output.mp")));
+			outputFile.write(ast.getCode());
 			outputFile.close();
 		} else {
 			ErrorHandler.getInstance().showErrors(System.err);

@@ -10,6 +10,7 @@ public class Assigment implements AstNode, Statement {
 	private int column;
 	private Expression left;
 	private Expression right;
+	private String code;
 
 	public Assigment(Expression left, Expression right) {
 		this.left = left;
@@ -57,6 +58,17 @@ public class Assigment implements AstNode, Statement {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 
 }

@@ -9,6 +9,7 @@ public class Cast implements Expression, AstNode {
 	private Expression operand;
 	private int line;
 	private int column;
+	private String code;
 
 	public Cast(Type type, Expression expr) {
 		this.type = type;
@@ -62,5 +63,16 @@ public class Cast implements Expression, AstNode {
 	public boolean isLValue() {
 		
 		return false;
+	}
+	
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+		
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 }
